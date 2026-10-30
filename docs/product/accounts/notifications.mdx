@@ -1,0 +1,72 @@
+---
+title: Notifications
+sidebar_position: 2
+description: Channels, what customers can switch off, quiet hours, and the messages that exist today.
+glance:
+  headline: 5 channels
+  unit: SMS, email, WhatsApp, in-app, push
+  rows:
+    - [Always on, Sign-in codes, payments]
+    - [Marketing, Off until opted in]
+    - [Quiet hours, 21:00 to 09:00 IST]
+    - [Push devices, Up to 10]
+  backend: partial
+  website: screen
+---
+
+# Notifications
+
+BachelorHouse can reach a customer by **SMS**, **email**, **WhatsApp**, **in-app** messages and **push** (for the mobile app). Every message belongs to a group, and customers choose per group and channel what they get.
+
+## What customers can switch off
+
+| Group | Examples | Default | Can switch off |
+| --- | --- | --- | --- |
+| Account and security | Sign-in codes, email verification | On | **No** |
+| Payments | Receipts, invoices, refunds | On | **No** |
+| Enquiries | New enquiry, chat | On | Yes |
+| Listings | Approved, changes requested, expiring | On | Yes |
+| Alerts | A PG room opened | On | Yes |
+| Updates | Anything else | On | Yes |
+| Marketing | Offers and promotions | **Off** | Yes, and needs an opt-in |
+
+A new kind of message lands in **Updates** unless it's deliberately put in another group, so nothing becomes impossible to switch off by accident.
+
+## Quiet hours
+
+Promotional messages are held between **21:00 and 09:00 IST** and sent at 09:00. Transactional messages (codes, receipts, the newsletter confirmation) are never held.
+
+## Unsubscribe links
+
+Emails carry an unsubscribe link that works **without signing in**. It shows which category and channel it switches off and a masked address, then switches it off. The website has an `/unsubscribe` screen for this.
+
+## Delivery
+
+- Messages are written to an outbox and sent by a background job, with up to **5 attempts** and increasing waits.
+- If a WhatsApp message fails permanently (for example, the number isn't on WhatsApp), the dispatcher can fall back to SMS.
+- SMS uses registered (DLT) templates only.
+- Staff can see a delivery log by recipient or event, with addresses masked.
+- Push needs the app to register the device. A customer can have up to 10 devices.
+
+## Messages that exist today
+
+| Message | Channel |
+| --- | --- |
+| Sign-in code | SMS |
+| Email verification | Email |
+| Feedback received, contact message received | Email |
+| Newsletter confirmation | Email |
+| Listing approved, changes requested, rejected, suspended | In-app |
+| Listing expiring in 3 days | In-app |
+| PG availability reminder (every 7 days) | In-app |
+| PG room opened (room alert) | In-app |
+| Ownership dispute opened, listing restored, listing removed | In-app |
+
+Staff manage templates by event, channel, language and version. A new version is added rather than edited, and each change is audited.
+
+## Edge cases worth testing
+
+- Turn off "Payments" email: refused.
+- Opt in to marketing SMS at 22:00: a promotion is held until 09:00.
+- Open an unsubscribe link while signed out.
+- Register an 11th push device.

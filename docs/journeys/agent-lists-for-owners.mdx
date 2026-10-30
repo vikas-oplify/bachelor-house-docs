@@ -1,0 +1,65 @@
+---
+title: Agent lists for owners
+sidebar_position: 5
+description: An agent's journey with a city plan and listing slots. Submit is blocked until agent approval exists.
+---
+
+# Agent lists for owners
+
+Sameer is a rental agent in Pune with 25 flats to list for different owners. This is his journey today.
+
+<JourneyRail
+  steps={[
+    { title: "Sign in", text: "Agent account", s: "built", href: "#1-sign-in-as-an-agent" },
+    { title: "Get verified", text: "ID, business, RERA", s: "none", href: "#2-get-verified" },
+    { title: "Buy a city plan", text: "30 to 60 slots", s: "partial", href: "#3-buy-a-city-plan", paid: true },
+    { title: "Draft listings", text: "Brokerage allowed", s: "built", href: "#4-draft-listings" },
+    { title: "Submit", text: "Declaration, slot", s: "partial", href: "#5-submit" },
+    { title: "First 5 reviewed", text: "Then trusted", s: "built", href: "#6-review-and-trust" },
+    { title: "Disputes", text: "Owner reports", s: "built", href: "#7-if-an-owner-objects" },
+  ]}
+/>
+
+## 1. Sign in as an agent
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> `/signup`
+
+Phone OTP and the profile as **agent**. An agent account always posts as an agent.
+
+## 2. Get verified
+
+**Backend** <Status s="none" /> · **Website** <Status s="none" />
+
+Not built. The KYC store already accepts agent identity, business, RERA and authorisation proofs, but there's no agent profile, no way to submit it, and no approval. **This blocks step 5.**
+
+## 3. Buy a city plan
+
+**Backend** <Status s="partial" /> · **Website** <Status s="screen" /> `/for-agent` (prices differ from the catalogue)
+
+He buys **Agent Starter** for Pune: 30 slots, 90 days, ₹7,999 before GST. Checkout works. The plan is recorded but doesn't give slots to listings yet. [Buying a plan](./buying-a-plan.mdx)
+
+## 4. Draft listings
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> `/post-property`
+
+The same 5-step form as an owner, plus a **brokerage** amount, which only agents may set. Several agents may list the same flat.
+
+## 5. Submit
+
+**Backend** <Status s="partial" /> · **Website** <Status s="none" />
+
+He ticks "I'm authorised to advertise this property" (without it: `CONSENT_REQUIRED`). Then the check for an approved agent fails: **`AGENT_NOT_APPROVED`**, every time, today.
+
+When it works: each live listing takes a slot on his Pune plan. The 31st gets `SLOT_LIMIT_EXCEEDED`. Pausing, renting, archiving or expiry gives the slot back. [Agent listings](../product/agents/agent-listings.mdx)
+
+## 6. Review and trust
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+His first **5** listings are reviewed. After that, his flats go live straight away unless they're possible duplicates or trip an automatic check. Each runs for his plan's listing duration (30 days on Starter).
+
+## 7. If an owner objects
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+An owner who never authorised him reports the listing with proof. It's **hidden at once**. He has **48 hours** to send an authorisation proof, then staff decide. If restored, the days it was hidden are added back. [Ownership disputes](../product/agents/ownership-disputes.mdx)

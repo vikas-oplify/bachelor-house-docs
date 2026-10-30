@@ -1,0 +1,320 @@
+/*
+ * BachelorHouse Docs theme. Brand tokens from bachelor-house-client (app/globals.css):
+ * primary sky #0EA5E9 / #0369A1, secondary gold #E2B728, teal-tinted grey scale, Figtree,
+ * rounded-full buttons. Design direction A ("Listings"): the docs look like the product.
+ */
+
+:root {
+  --bh-sky-50: #f0f9ff;
+  --bh-sky-100: #e0f2fe;
+  --bh-sky-200: #bae6fd;
+  --bh-sky-400: #38bdf8;
+  --bh-sky-500: #0ea5e9;
+  --bh-sky-700: #0369a1;
+  --bh-sky-900: #0c4a6e;
+  --bh-sky-950: #082f49;
+  --bh-gold: #e2b728;
+
+  --bh-ink: #212526;
+  --bh-ink-2: #4c5457;
+  --bh-muted: #616b70;
+  --bh-line: #d9dcde;
+  --bh-line-soft: #e8ebec;
+  --bh-surface: #f1f3f3;
+  --bh-wash: var(--bh-sky-50);
+  --bh-wash-2: var(--bh-sky-100);
+  --bh-shadow: 0 1px 2px rgba(12, 74, 110, 0.06), 0 8px 24px rgba(12, 74, 110, 0.08);
+
+  --bh-rule-bg: #fefce8;
+  --bh-rule-line: #e2b728;
+  --bh-rule-ink: #713f12;
+  --bh-ok-bg: #ecfdf5;
+  --bh-ok-ink: #047857;
+  --bh-part-bg: #fff7ed;
+  --bh-part-ink: #c2410c;
+  --bh-ui-bg: #f3e8ff;
+  --bh-ui-ink: #7e22ce;
+  --bh-none-bg: #f1f3f3;
+  --bh-none-ink: #4c5457;
+
+  --ifm-color-primary: #0369a1;
+  --ifm-color-primary-dark: #035f91;
+  --ifm-color-primary-darker: #035a89;
+  --ifm-color-primary-darkest: #024a71;
+  --ifm-color-primary-light: #0373b1;
+  --ifm-color-primary-lighter: #0378b9;
+  --ifm-color-primary-lightest: #0487d1;
+
+  --ifm-font-family-base: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ifm-heading-font-family: var(--ifm-font-family-base);
+  --ifm-font-family-monospace: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ifm-font-color-base: var(--bh-ink);
+  --ifm-heading-color: var(--bh-ink);
+  --ifm-heading-font-weight: 700;
+  --ifm-line-height-base: 1.65;
+  --ifm-global-radius: 12px;
+  --ifm-button-border-radius: 999px;
+  --ifm-code-font-size: 86%;
+  --ifm-code-background: var(--bh-surface);
+  --ifm-code-border-radius: 6px;
+  --ifm-background-color: #ffffff;
+  --ifm-navbar-shadow: none;
+  --ifm-toc-border-color: var(--bh-line-soft);
+  --ifm-table-border-color: var(--bh-line);
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background: var(--bh-surface);
+  --ifm-menu-color: var(--bh-ink-2);
+  --ifm-menu-color-background-active: var(--bh-sky-100);
+  --ifm-menu-color-background-hover: var(--bh-sky-50);
+  --docusaurus-highlighted-code-line-bg: rgba(14, 165, 233, 0.1);
+}
+
+html[data-theme="dark"] {
+  --bh-ink: #f1f3f3;
+  --bh-ink-2: #c0c6c8;
+  --bh-muted: #899499;
+  --bh-line: #2b3639;
+  --bh-line-soft: #1f2a2d;
+  --bh-surface: #172124;
+  --bh-wash: #0c2a3a;
+  --bh-wash-2: #0f3448;
+  --bh-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  --bh-rule-bg: #2a2410;
+  --bh-rule-ink: #f6de8a;
+  --bh-ok-bg: #0d2a22;
+  --bh-ok-ink: #6ee7b7;
+  --bh-part-bg: #2e1c0e;
+  --bh-part-ink: #fdba74;
+  --bh-ui-bg: #2a1640;
+  --bh-ui-ink: #d8b4fe;
+  --bh-none-bg: #1f2a2d;
+  --bh-none-ink: #c0c6c8;
+
+  --ifm-color-primary: #38bdf8;
+  --ifm-color-primary-dark: #1bb3f7;
+  --ifm-color-primary-darker: #0daef7;
+  --ifm-color-primary-darkest: #0893d2;
+  --ifm-color-primary-light: #55c7f9;
+  --ifm-color-primary-lighter: #63cbf9;
+  --ifm-color-primary-lightest: #8ed9fb;
+  --ifm-background-color: #0f1719;
+  --ifm-background-surface-color: #121b1e;
+  --ifm-navbar-background-color: #0f1719;
+  --ifm-menu-color-background-active: rgba(56, 189, 248, 0.14);
+  --ifm-menu-color-background-hover: rgba(56, 189, 248, 0.07);
+  --docusaurus-highlighted-code-line-bg: rgba(56, 189, 248, 0.12);
+}
+
+/* ─── Chrome ──────────────────────────────────────────────────────────── */
+
+.navbar {
+  border-bottom: 1px solid var(--bh-line-soft);
+}
+.navbar__title {
+  color: var(--bh-sky-700);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+}
+html[data-theme="dark"] .navbar__title {
+  color: var(--bh-sky-400);
+}
+.navbar__title::after {
+  content: " Docs";
+  color: var(--bh-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0;
+}
+.navbar__link {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.footer--dark {
+  --ifm-footer-background-color: var(--bh-sky-950);
+}
+
+/* Navbar search looks like the BH hero search: a pill. */
+.navbar__search-input,
+[class*="searchBar"] input {
+  border-radius: 999px !important;
+}
+
+.theme-doc-sidebar-menu .menu__link {
+  font-size: 0.92rem;
+}
+.theme-doc-sidebar-menu > .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
+  font-weight: 700;
+}
+
+.button--primary {
+  --ifm-button-background-color: var(--bh-sky-500);
+  --ifm-button-border-color: var(--bh-sky-500);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 -2px 0 rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+.button--primary:hover {
+  --ifm-button-background-color: #0284c7;
+  --ifm-button-border-color: #0284c7;
+  color: #fff;
+}
+
+/* ─── Content ─────────────────────────────────────────────────────────── */
+
+.markdown h1:first-child {
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.markdown h2 {
+  margin-top: 2.6rem;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.markdown > p:first-of-type {
+  font-size: 1.08rem;
+  color: var(--bh-ink-2);
+}
+.markdown table {
+  display: table;
+  width: 100%;
+  font-size: 0.9rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--bh-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.markdown table thead tr {
+  border-bottom: 0;
+}
+.markdown table th {
+  text-align: left;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.markdown table th,
+.markdown table td {
+  border: 0;
+  border-bottom: 1px solid var(--bh-line-soft);
+  padding: 0.6rem 0.85rem;
+  vertical-align: top;
+}
+.markdown table tr:last-child td {
+  border-bottom: 0;
+}
+.markdown table td {
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 996px) {
+  .markdown table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+.markdown code {
+  border: 0;
+  padding: 0.1rem 0.35rem;
+  overflow-wrap: break-word;
+}
+
+.docusaurus-mermaid-container {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 1rem;
+  margin-bottom: var(--ifm-leading);
+  border: 1px solid var(--bh-line);
+  border-radius: 14px;
+  background: var(--bh-surface);
+  overflow-x: auto;
+}
+
+/* Business rules: gold callouts. `:::note[Rule]` keeps working; `:::info` stays sky. */
+.alert--secondary {
+  --ifm-alert-background-color: var(--bh-rule-bg);
+  --ifm-alert-background-color-highlight: rgba(226, 183, 40, 0.15);
+  --ifm-alert-foreground-color: var(--bh-rule-ink);
+  --ifm-alert-border-color: var(--bh-rule-line);
+  border: 1px solid var(--bh-rule-line);
+  border-left-width: 5px;
+}
+.alert--info {
+  --ifm-alert-background-color: var(--bh-wash);
+  --ifm-alert-border-color: var(--bh-sky-500);
+}
+.alert {
+  border-radius: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Mermaid in BH colours, both themes. */
+.docusaurus-mermaid-container svg {
+  max-width: 100%;
+  height: auto;
+}
+.docusaurus-mermaid-container .node rect,
+.docusaurus-mermaid-container .node polygon,
+.docusaurus-mermaid-container .node circle,
+.docusaurus-mermaid-container .node path,
+.docusaurus-mermaid-container .actor {
+  fill: var(--bh-wash-2) !important;
+  stroke: var(--bh-sky-500) !important;
+}
+.docusaurus-mermaid-container .nodeLabel,
+.docusaurus-mermaid-container .nodeLabel p,
+.docusaurus-mermaid-container .node text,
+.docusaurus-mermaid-container text.actor,
+.docusaurus-mermaid-container .actor tspan,
+.docusaurus-mermaid-container .messageText,
+.docusaurus-mermaid-container .labelText,
+.docusaurus-mermaid-container .loopText,
+.docusaurus-mermaid-container .loopText tspan,
+.docusaurus-mermaid-container .cluster-label span,
+.docusaurus-mermaid-container .cluster-label p {
+  color: var(--bh-ink) !important;
+  fill: var(--bh-ink) !important;
+}
+.docusaurus-mermaid-container .flowchart-link,
+.docusaurus-mermaid-container .messageLine0,
+.docusaurus-mermaid-container .messageLine1,
+.docusaurus-mermaid-container .actor-line,
+.docusaurus-mermaid-container .loopLine {
+  stroke: var(--bh-muted) !important;
+}
+.docusaurus-mermaid-container marker path,
+.docusaurus-mermaid-container .arrowheadPath,
+.docusaurus-mermaid-container #arrowhead path {
+  fill: var(--bh-muted) !important;
+  stroke: var(--bh-muted) !important;
+}
+.docusaurus-mermaid-container .edgeLabel,
+.docusaurus-mermaid-container .edgeLabel p,
+.docusaurus-mermaid-container .edgeLabel rect,
+.docusaurus-mermaid-container .labelBkg {
+  background-color: var(--bh-surface) !important;
+  fill: var(--bh-surface) !important;
+  color: var(--bh-ink-2) !important;
+}
+.docusaurus-mermaid-container .cluster rect {
+  fill: var(--ifm-background-color) !important;
+  stroke: var(--bh-line) !important;
+}
+.docusaurus-mermaid-container .labelBox,
+.docusaurus-mermaid-container .note {
+  fill: var(--bh-rule-bg) !important;
+  stroke: var(--bh-rule-line) !important;
+}

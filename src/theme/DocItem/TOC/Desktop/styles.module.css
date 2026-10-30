@@ -1,0 +1,11 @@
+.sticky {
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+  max-height: calc(100vh - var(--ifm-navbar-height) - 2rem);
+  overflow-y: auto;
+}
+/* The stock TOC is sticky on its own; inside this wrapper the wrapper does that job. */
+.sticky :global(.theme-doc-toc-desktop) {
+  position: static;
+  max-height: none;
+}

@@ -1,0 +1,62 @@
+---
+title: Content and forms
+sidebar_position: 3
+description: Blogs, FAQs, banners, legal pages, careers, and the public forms with their inbox.
+glance:
+  headline: 5 forms
+  unit: into one staff inbox
+  rows:
+    - [Bot check, Cloudflare Turnstile]
+    - [Form limit, 5 per hour per form]
+    - [Legal pages, Versioned]
+    - [Scheduled posts, Checked every minute]
+  backend: built
+  website: screen
+---
+
+# Content and forms
+
+Content editors run the site's editorial pages from the admin API. Public forms land in a shared inbox for support. The website has screens for most of these (`/blogs`, `/faqs`, `/careers`, `/contact`, `/feedback`, `/advertise`, `/testimonials`, `/terms`, `/privacy-policy`) with placeholder content, not connected yet.
+
+## Content
+
+| Type | What staff manage | Public behaviour |
+| --- | --- | --- |
+| Articles | Blogs and news, with categories, city, tags and SEO fields. Can be scheduled. | Published articles only, filterable by type, category, city and tag. Each shows up to 4 related articles. |
+| Banners | Placement, city, start and end dates | Shown only inside their date window |
+| FAQs | Grouped in sections | Active FAQs, optionally for one section |
+| Testimonials | Per city | Active testimonials |
+| Jobs | Draft, open or closed; full time, part time, contract, internship | Open roles only |
+| Static pages | Terms, privacy, refund, about, grievance | Current version |
+
+Scheduled articles go live within a minute of their time. All rich text is cleaned of unsafe HTML before it's stored.
+
+:::note[Rule · Legal pages are versioned]
+Publishing a static page adds a new version and keeps the old ones. A customer's consent to terms or privacy records the exact version they were shown, so BachelorHouse can always prove what someone agreed to.
+:::
+
+## Public forms
+
+| Form | Returns | Notes |
+| --- | --- | --- |
+| Contact | A `CT` reference | Topics: general, account, listing, payments, report abuse, partnership, other |
+| Feedback | An `FB` reference | From renters, owners or agents: suggestion, compliment or problem. The same feedback twice in 24 hours counts once. |
+| Advertise with us | | A sales lead |
+| Job application | | Optional resume upload |
+| Newsletter | Always "accepted" | Double opt-in: an email link, valid 7 days, confirms it. The response never reveals whether an email is already subscribed. |
+
+Every public form checks **Cloudflare Turnstile** and allows **5 submissions per hour per form** from one network address. The newsletter also limits each email to 3 sign-ups an hour.
+
+## The staff inbox
+
+Contact messages, feedback, job applications and advertise leads each have a list for support staff. Contact messages flagged as priority come first. Staff set a **status** (new, in progress, resolved, closed), an **assignee** and a **resolution note**. A resume opens through a 60-second link.
+
+Job applications are deleted after **12 months**.
+
+## Edge cases worth testing
+
+- Schedule an article for 2 minutes from now: live within a minute after.
+- A banner whose end date passed: not returned.
+- 6th contact message in an hour from one address: refused.
+- Subscribe the same email twice: same response both times.
+- Publish a new terms version: earlier consents still point at the old one.

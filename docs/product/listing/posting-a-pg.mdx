@@ -1,0 +1,78 @@
+---
+title: Posting a PG
+sidebar_position: 2
+description: The 6-step PG form, room configurations, and the KYC step.
+glance:
+  headline: 6 steps
+  unit: including KYC
+  rows:
+    - [Who, Owners and agents]
+    - [Sharing types, Private, double, triple, 3+]
+    - [Photos, Building + each sharing type]
+    - [Review, Every PG]
+  backend: built
+  website: screen
+  journey: /journeys/pg-lists-a-pg
+---
+
+# Posting a PG
+
+A PG listing describes a whole paying-guest property: its rooms, what each sharing type costs, the house rules, and proof that the lister runs it. The form has 6 steps. Like a flat, each step saves on its own and nothing is public until the PG passes review.
+
+The website form is at `/pg/post-property`, including the room configuration pop-up and the KYC step. It doesn't save anything yet.
+
+## Who posts as what
+
+The account type decides the lister type. An **agent** account always posts as an agent. An **owner** account posts as the owner or as a property manager. A PG can be "managed by" the landlord, a caretaker or a professional operator.
+
+## The steps
+
+| # | Step | What the lister enters |
+| --- | --- | --- |
+| 1 | **Basic** | PG name, contact name, gender allowed, tenant type, notice and lock-in days, total rooms, and how many rooms of each sharing type |
+| 2 | **Location** | City, locality (from the list only), address, optional landmark |
+| 3 | **Rooms** | One entry per room configuration: name, rent per bed, deposit, rooms, rooms free, room facilities |
+| 4 | **Amenities** | House rules, services, security and extras from the PG amenity list, meals, description |
+| 5 | **Photos** | A building photo, a photo for each sharing type offered, up to 3 per category and 20 in all |
+| 6 | **KYC** | The lister's PG KYC submission. See [PG KYC](./pg-kyc.mdx). |
+
+## Field rules
+
+| Field | Rule |
+| --- | --- |
+| PG name | 2 to 100 characters |
+| Gender allowed | Male, female or any |
+| Tenant type | Students, professionals or any |
+| Notice period | 0 to 180 days |
+| Lock-in | 0 to 365 days |
+| Sharing types | Private, double, triple, or **3+ sharing**. A 3+ room has no bed count anywhere. |
+| Rooms per sharing type | At least 1 each. The rooms of a sharing type must add up across its configurations. |
+| Room configurations | 1 to 20. Each has a rent per bed (at least ₹1), a deposit, a room count and optional facilities. |
+| Rooms free | Optional. Left out, every room counts as free. |
+| Locality | Must be picked from the list. A PG can't request a new locality. |
+| Meals | Any of breakfast, lunch and dinner |
+| Description | Optional, up to 1,000 characters |
+
+## Photos
+
+PG photos are sorted into categories instead of tags: exterior, building, common area, kitchen, washroom, and one room category per sharing type. To submit:
+
+- at least one **building** photo,
+- at least one photo for **each sharing type the PG offers** (and none for a type it doesn't),
+- at most **3 photos per category** and **20 in all**.
+
+If the lister doesn't pick a cover, the first building photo becomes the cover.
+
+## Keeping rooms up to date
+
+Once live, the lister can change how many rooms of a configuration are free **without a new review**. That change doesn't touch the listing's plan, status or expiry. A PG with rooms but none free is **full**: it is treated as unavailable for search, matching and contact, and tenants can ask to be [alerted when a room opens](../tenants/pg-room-alerts.mdx).
+
+Every 7 days the lister is asked to confirm the PG is still accurate. If they don't, the listing shows "Availability not recently verified". See [Listing lifecycle](./listing-lifecycle.mdx#pg-availability-check).
+
+## Edge cases worth testing
+
+- A PG offering private and double rooms with photos for triple: refused.
+- 4 photos in the kitchen category: refused.
+- Rooms per sharing type that don't add up to the configurations.
+- Setting rooms free to 0 on the last open configuration: the PG becomes full.
+- Then setting it to 1: tenants with an alert are notified once.

@@ -1,0 +1,53 @@
+---
+title: Search and places
+sidebar_position: 3
+description: Cities, localities, place autocomplete and "use my location". Listing search is not built yet.
+glance:
+  headline: Pune
+  unit: the only city today
+  rows:
+    - [Autocomplete, From 3 letters, typos OK]
+    - [Use my location, Within 30 km]
+    - [Listing search, Not built]
+  backend: partial
+  website: screen
+---
+
+# Search and places
+
+The place data behind search is built: cities, localities, landmarks and societies, with typo-tolerant autocomplete. **Searching listings is not built.** The website's listing pages (`/properties`, `/pg/properties`) and detail pages show sample data.
+
+## Places
+
+| Place | What it is | Who manages it |
+| --- | --- | --- |
+| City | Pune is seeded. A second city can be added by staff. | Staff |
+| Locality | Areas within a city, e.g. Baner, Hadapsar | Staff. Listers of flats can request a new one. |
+| Landmark | Colleges, IT parks, metro and railway stations, bus stands, malls, hospitals, office hubs | Staff |
+| Society | Housing societies, with aliases and a map pin | Seeded for Pune. Staff rename, fix aliases and merge duplicates. A lister can type a society that isn't listed; it's saved as text on the listing. |
+
+Inactive places are hidden from customers but never deleted.
+
+## Autocomplete
+
+- Suggests localities, landmarks and societies within a city.
+- Starts at **3 characters**, returns up to **10** suggestions.
+- Tolerates typos ("banr" finds Baner).
+
+## Use my location
+
+The website sends the device's coordinates once and gets back the nearest city and locality. A point more than **30 km** from every active locality is outside the areas BachelorHouse serves. The coordinates are not stored or logged.
+
+## Listing search
+
+Not built. What exists for it today:
+
+- Every listing keeps a search text index, refreshed on submit and on change.
+- The [quality score](../listing/quality-score.mdx) and a versioned ranking configuration are in place.
+- Decided but not built: search snapshots with signed page cursors, paid placement (with a setting for whether it applies when the user picks a sort), homepage rotation, and tenant-to-listing matching (switched off).
+
+## Edge cases worth testing
+
+- Autocomplete with 2 characters: refused.
+- "Use my location" from Mumbai: no city found.
+- A society merged into another: autocomplete returns only the survivor.

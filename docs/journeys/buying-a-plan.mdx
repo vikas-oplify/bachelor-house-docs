@@ -1,0 +1,81 @@
+---
+title: Buying a plan
+sidebar_position: 6
+description: Checkout from picking a plan to a fulfilled order, and what happens after.
+---
+
+# Buying a plan
+
+Priya's Free listing ended and she wants **Prime Connect** for her flat. The same steps apply to every plan; only what it's bought for changes (a listing, a city, or the account).
+
+<JourneyRail
+  steps={[
+    { title: "See plans", text: "For her account type", s: "built", href: "#1-see-the-plans" },
+    { title: "Billing details", text: "GSTIN optional", s: "built", href: "#2-billing-details" },
+    { title: "Coupon", text: "Priced, not reserved", s: "built", href: "#3-apply-a-coupon" },
+    { title: "Create order", text: "30 minutes to pay", s: "built", href: "#4-create-the-order", paid: true },
+    { title: "Pay", text: "Razorpay", s: "built", href: "#5-pay", paid: true },
+    { title: "Verify", text: "Fulfilled once", s: "built", href: "#6-verify-and-fulfil" },
+    { title: "Invoice", text: "Zoho GST invoice", s: "none", href: "#7-invoice" },
+    { title: "Plan applies", text: "To the listing", s: "none", href: "#8-the-plan-takes-effect" },
+  ]}
+/>
+
+## 1. See the plans
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> `/for-owner` (shows ₹799 for Prime Connect; the catalogue says ₹2,499)
+
+She sees owner and PG plans only, because she's an owner. [Plans & pricing](../product/money/plans-and-pricing.mdx)
+
+## 2. Billing details
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+Optional. She saves her name, address and state, and a GSTIN if she has one. The GSTIN is checked for format, checksum and state code.
+
+## 3. Apply a coupon
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+She enters `DIWALI20`. The website shows the discount, taxable value, GST and total. Nothing is reserved yet. [Coupons](../product/money/coupons.mdx)
+
+## 4. Create the order
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+The server prices it from the plan version: ₹2,499 − 20% = ₹1,999.20, plus 9% CGST and 9% SGST because she's in Maharashtra. The coupon use is reserved. A Razorpay order is created and she gets an order number like `BHO-261030-00042`. She has **30 minutes** to pay. Pressing Buy again returns the same order.
+
+## 5. Pay
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+She pays in the Razorpay checkout. Card details never reach BachelorHouse.
+
+## 6. Verify and fulfil
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+The website sends Razorpay's callback. The server checks the signature, fetches the payment amount from Razorpay itself, and fulfils the order **once**: the subscription starts and the coupon use is consumed. If the payment is authorised but not captured yet, she sees "Pending verification".
+
+If she closes the browser right after paying, nothing picks the payment up: there's no Razorpay webhook or reconcile job yet.
+
+## 7. Invoice
+
+**Backend** <Status s="none" /> · **Website** <Status s="none" />
+
+The order is queued for a GST invoice through Zoho, but nothing processes the queue yet.
+
+## 8. The plan takes effect
+
+**Backend** <Status s="none" /> · **Website** <Status s="none" />
+
+Not connected. The subscription exists, but listing submit and reactivate don't read it, so her flat still gets `PLAN_REQUIRED`. The same goes for agent slots and tenant contacts. [Known limitations](../product/known-limitations.md)
+
+## If something goes wrong
+
+| What happens | Result |
+| --- | --- |
+| She doesn't pay in 30 minutes | The order expires and the coupon use is released |
+| She pays after it expired | The payment is flagged for finance; no plan starts |
+| Staff reject a listing she paid for before it ever went live | A full refund is queued (paid manually today) |
+| She tries to delete her account mid-payment | Refused until the order settles |

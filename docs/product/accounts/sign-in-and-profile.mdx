@@ -1,0 +1,94 @@
+---
+title: Sign-in and profile
+sidebar_position: 1
+description: Phone OTP sign-in, completing the profile, consents, email check, phone change and sessions.
+glance:
+  headline: Phone OTP
+  unit: no passwords
+  rows:
+    - [Code, 6 digits, 5 minutes]
+    - [Account types, Tenant, owner, agent]
+    - [Stay signed in, 30 days]
+    - [Account type, Fixed at signup]
+  backend: built
+  website: screen
+---
+
+# Sign-in and profile
+
+Customers sign in with their **mobile number and a one-time code by SMS**. There are no passwords. The first sign-in creates the account; the person then completes a short profile before they can do anything else.
+
+The website's `/login` and `/signup` screens (with the OTP step) match this flow but aren't connected yet.
+
+## Signing in
+
+1. The customer enters their number and asks for a code.
+2. A **6-digit code** is sent by SMS. It's valid for **5 minutes** and allows **5 attempts**.
+3. The customer enters the code. If it matches, they're signed in. A new number creates a new account in "profile pending" state.
+
+The response is the same whether the number is new or already has an account, so the screen can't be used to find out who is registered.
+
+### Limits
+
+| Limit | Default |
+| --- | --- |
+| Wait before asking again for the same number | 30 seconds |
+| Codes per number | 5 per hour, 10 per day |
+| Codes per network address | 20 per hour |
+| SMS codes across all users per day | 2,000 (placeholder). Past this, requests get "service unavailable". |
+
+If the SMS provider doesn't take the message, the request fails straight away and doesn't count against the customer's limits.
+
+## Completing the profile
+
+After the first sign-in, the customer fills:
+
+| Field | Rule |
+| --- | --- |
+| Name | 2 to 80 characters |
+| Email | Optional |
+| I am a | **Tenant**, **owner** or **agent**. This can't be changed later. |
+| 18 or older | Must be ticked |
+| Terms and Privacy policy | Must be accepted. The consent records the exact version of each page that was shown. |
+| Marketing by email, SMS, WhatsApp | Optional, each on its own |
+
+Nothing is pre-ticked. Missing the 18+ box, terms or privacy fails with `CONSENT_REQUIRED`.
+
+:::note[Rule · Suspension follows the number]
+If a number was suspended before, a new account on the same number starts suspended too.
+:::
+
+## Checking the email
+
+If an email is given, a verification link is sent. It's **single use** and valid for **24 hours**. The customer can ask for a new link. Email verification goes out even if the customer has turned off update emails.
+
+## Consents in settings
+
+From settings, a signed-in customer can give or withdraw: marketing by email, SMS and WhatsApp, personalised recommendations, and contact sharing. Terms, privacy and 18+ are fixed at signup.
+
+## Changing your phone number
+
+1. The customer enters the new number. A code goes to the **new number** and another to the **current number**.
+2. They enter both codes.
+3. The number switches and every other signed-in device is signed out.
+
+Limits: 5 change requests and 20 code checks per hour.
+
+## Sessions and devices
+
+| Rule | Detail |
+| --- | --- |
+| Short-lived access | 15 minutes, renewed silently |
+| Staying signed in | 30 days. Each renewal issues a new refresh token and retires the old one. |
+| Two tabs renewing at once | A 30-second grace period stops one tab signing the other out |
+| Devices | The customer can list their signed-in devices, sign one out, or sign out everywhere |
+| Signing out | Works even with an expired session |
+
+## Edge cases worth testing
+
+- Ask for a code twice within 30 seconds.
+- Wrong code 5 times, then the right one: refused.
+- Code entered after 5 minutes: refused.
+- Complete the profile without ticking 18+.
+- Try to change account type after signup: refused with "already set".
+- Change number: another browser signed in on the old number is signed out.

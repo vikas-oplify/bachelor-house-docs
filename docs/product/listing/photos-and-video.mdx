@@ -1,0 +1,69 @@
+---
+title: Photos and video
+sidebar_position: 3
+description: Uploading, processing and attaching listing photos and video.
+glance:
+  headline: 4 MB
+  unit: per photo · 100 MB per video
+  rows:
+    - [Photo types, PNG, JPEG, WebP, GIF]
+    - [Sizes made, 320, 800, 1600 px]
+    - [Watermark, On the 1600 px size]
+    - [Unused uploads, Deleted after 24 h]
+  backend: built
+  website: screen
+---
+
+# Photos and video
+
+Listing media goes in two moves: the lister **uploads** a file straight to storage, then **attaches** it to a listing with its tag or category. Processing happens in the background in between.
+
+## Uploading
+
+1. The website asks for a signed upload form for one file, naming its purpose (listing photo, listing video, KYC document, agent photo or resume).
+2. The browser uploads the file straight to storage. It never passes through the API.
+3. The website confirms the upload. The backend checks the file exists with the declared type and size, then queues processing.
+
+A user can have at most **20 uploads open** (asked for but not finished) at once.
+
+| Purpose | Accepted types | Max size |
+| --- | --- | --- |
+| Listing photo | PNG, JPEG, WebP, GIF (no SVG) | 4 MB |
+| Listing video | MP4, MOV, MPEG, AVI, WMV, FLV, 3GP, WebM | 100 MB |
+| KYC document | Kept in a separate private store | See [PG KYC](./pg-kyc.mdx) |
+
+## Processing
+
+- **Photos** are resized to 320, 800 and 1,600 px wide, in WebP and AVIF, with a blur placeholder for loading. The **1,600 px version carries the BachelorHouse watermark**. Each photo also gets a fingerprint used to spot [duplicate photos](./submission-and-review.mdx#automatic-checks).
+- **Videos** are transcoded to at most 1,080 px on the short side. Video has its own queue and runs one at a time.
+- If processing is stuck for 15 minutes, a sweeper puts it back in the queue.
+
+The website can poll an upload for its status: awaiting upload, uploaded, processing, ready, rejected or deleted.
+
+## Attaching to a listing
+
+A ready photo is attached with a **tag** (flats) or a **category** (PGs), and can be set as the cover, reordered or retagged later. A video takes no tag. A listing can have **one video**.
+
+| When | Can media change? |
+| --- | --- |
+| Draft | Yes, freely |
+| Live | Yes, but not below what the listing needed to go live (5 photos and a cover for a flat; the building and sharing-type photos for a PG) |
+| In review, rejected, deleted | No |
+
+Removing a photo from a listing deletes the file.
+
+## Moderation of media
+
+A photo or video is public only once approved. Staff can approve, reject or suspend a piece of media from the [moderation queue](../platform/moderation.mdx); a rejected or suspended one is hidden.
+
+## Clean-up
+
+Uploads never attached to anything are deleted after **24 hours** by a daily job.
+
+## Edge cases worth testing
+
+- Upload a file named `.jpg` that is really a PDF.
+- 21st open upload: refused.
+- Attach a second video: refused.
+- Remove photos from a live flat until 4 are left: the 5th removal is refused.
+- Attach a photo while the listing is in review: refused.

@@ -1,0 +1,62 @@
+---
+title: Agent listings
+sidebar_position: 1
+description: How agents list on city plans with slots, and why agent submit is blocked today.
+glance:
+  headline: 30 to 60 slots
+  unit: per city plan
+  rows:
+    - [Who, Agent accounts]
+    - [Reviewed, First 5 listings]
+    - [Brokerage, Agents may state it]
+    - [Submit today, Blocked]
+  backend: partial
+  website: screen
+  journey: /journeys/agent-lists-for-owners
+---
+
+# Agent listings
+
+Agents list properties on behalf of owners. Instead of paying per listing, an agent buys a **city plan** that gives a number of **listing slots** in one city. Each live listing uses a slot.
+
+:::info[Blocked today]
+There is no agent profile or agent verification yet, so the submit check "is this an approved agent?" always fails with `AGENT_NOT_APPROVED`. Agents can sign up, draft listings and buy a city plan, but can't publish.
+:::
+
+## What an agent needs to publish
+
+1. An **approved agent profile** with verified identity. Agents prove identity, business and RERA registration through the same review flow as [PG KYC](../listing/pg-kyc.mdx). The documents types exist; the profile and its approval don't yet.
+2. The **authority declaration** on each listing: "I'm authorised to advertise this property". Without it: `CONSENT_REQUIRED`.
+3. For a flat: a **free slot** on an active city plan for that city (`NO_ACTIVE_SUBSCRIPTION` or `SLOT_LIMIT_EXCEEDED` otherwise).
+4. For a PG: a **PG plan** assigned to the listing.
+
+## City plans and slots
+
+| Plan | Price (before GST) | Valid for | Slots | Each listing runs | Extras |
+| --- | --- | --- | --- | --- | --- |
+| Agent Starter | ₹7,999 (was ₹9,999) | 90 days | 30 | 30 days | Basic analytics |
+| Agent Plus | ₹10,999 (was ₹14,999) | 120 days | 45 | 45 days | Featured badge, homepage featured section, advanced analytics |
+| Agent Elite | ₹17,999 (was ₹24,999) | 180 days | 60 | 60 days | Premium featured badge, homepage premium section, locality benchmarks |
+
+How slots behave:
+
+- A slot is used when a listing goes live and given back when it's paused, rented, archived, expired or deleted.
+- The slot count changes in the same step as the listing's state, so two listings can't share the last slot.
+- **Upgrade:** live listings move to the new plan up to its slot limit, and each starts a fresh duration of the new plan.
+- **Downgrade:** allowed only if the occupied slots fit the lower limit.
+- A nightly recount at 03:30 IST alerts staff if the slot count drifts. It never corrects it on its own. (Scheduled; no handler yet.)
+
+## Review
+
+An agent's listings are reviewed until **5 have been approved**. After that, an agent listing goes live straight away unless it's a possible duplicate or trips an automatic check. PG listings are always reviewed.
+
+## Same flat, several agents
+
+Several agents can list the same physical flat. Each listing can show the other accounts' live listings of the same unit ("also listed by").
+
+## Edge cases to test once agents can publish
+
+- 31st listing on Agent Starter: `SLOT_LIMIT_EXCEEDED`.
+- Pause one, publish another: allowed.
+- Downgrade from Plus (40 live) to Starter: refused.
+- Submit without the declaration: `CONSENT_REQUIRED`.

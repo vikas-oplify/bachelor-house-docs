@@ -1,0 +1,60 @@
+---
+title: Moderation
+sidebar_position: 2
+description: The staff review queue, claiming items, the four decisions, and what each does.
+glance:
+  headline: 4 decisions
+  unit: approve, changes, reject, suspend
+  rows:
+    - [Who, Super admin, admin, moderator]
+    - [Claim lasts, 30 minutes]
+    - [Lister sees, The note]
+    - [Target, 24 hours]
+  backend: partial
+  website: none
+  journey: /journeys/staff-review-a-listing
+---
+
+# Moderation
+
+Everything that needs a human look lands in one **moderation queue**: listings, media, KYC submissions, possible duplicate properties, and ownership disputes. Staff only see the subject types their role may review.
+
+## Working the queue
+
+1. **Open the queue**, oldest and highest priority first. Filter by subject, status and reason, or show only items you've claimed.
+2. **Claim** an item. A claim lasts **30 minutes**, so two moderators don't review the same thing. A job every 5 minutes puts expired claims back in the queue.
+3. **Decide**, with a **reason code** and a **note the lister sees**. Every decision is audited.
+4. Or **release** the claim to hand it back.
+
+## Decisions on a listing
+
+| Decision | From | Listing becomes | Lister is told |
+| --- | --- | --- | --- |
+| **Approve** | In review | Live. A Free listing's 30 days start now, and the Free allowance is used. | Approved |
+| **Request changes** | In review | Changes requested. The lister withdraws to a draft, fixes, and resubmits. | Changes requested, with the note |
+| **Reject** | In review | Rejected. A reserved Free listing is released. Any paid order is queued for a full refund. | Rejected, with the note |
+| **Suspend** | In review, live, paused | Suspended | Suspended, with the note |
+
+Staff notes are shown to the lister in the listing's history. Notes written by the lister or by the system stay private.
+
+## Other subjects
+
+| Subject | What a decision does |
+| --- | --- |
+| Media (a photo or video) | Approve makes it public. Reject or suspend hides it. |
+| KYC submission | Approve or reject only. See [PG KYC](../listing/pg-kyc.mdx). |
+| Possible duplicate property | Recorded and audited; no automatic effect yet |
+| Ownership dispute | Decided from the disputes screen. See [Ownership disputes](../agents/ownership-disputes.mdx). |
+| Listing edits, agent profiles, agent verification, reviews, chat messages | Recorded and audited only. These features don't exist yet. |
+
+## Why an item is in the queue
+
+`pg`, `first_listing`, `agent_first_five`, `possible_duplicate`, or `auto_flag` with the flags raised (banned words, duplicate photos, rent outlier). See [Submitting a listing](../listing/submission-and-review.mdx#which-listings-are-reviewed).
+
+## Edge cases worth testing
+
+- Two moderators claim the same item: the second is refused.
+- Claim, wait 31 minutes, another moderator claims: allowed.
+- Approve a listing that the lister withdrew a moment ago: refused.
+- A support user opens the queue: no listing items.
+- Reject a listing with a paid order: refund queued (check the order, since refunds don't process yet).

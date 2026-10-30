@@ -1,0 +1,35 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.05rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.built {
+  background: var(--bh-ok-bg);
+  color: var(--bh-ok-ink);
+}
+.partial {
+  background: var(--bh-part-bg);
+  color: var(--bh-part-ink);
+}
+.screen {
+  background: var(--bh-ui-bg);
+  color: var(--bh-ui-ink);
+}
+.none {
+  background: var(--bh-none-bg);
+  color: var(--bh-none-ink);
+}

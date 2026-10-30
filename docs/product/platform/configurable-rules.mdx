@@ -1,0 +1,111 @@
+---
+title: Configurable rules
+sidebar_position: 4
+description: Every setting staff can change without a release, with its launch default.
+glance:
+  headline: 38 settings
+  unit: changed without a release
+  rows:
+    - [Who changes, Super admin]
+    - [Every change, Validated and audited]
+    - [Also editable, Plans, coupons, places, amenities]
+  backend: built
+  website: none
+---
+
+# Configurable rules
+
+Most numbers in this guide are **settings**: a super admin can change them through the admin API without a code release. Each setting has a schema, so a bad value is refused, and every change is audited with a reason.
+
+Settings marked *not used yet* exist for features that aren't built. Settings marked *fixed in code* have a feature that works, but the code uses a fixed value instead of reading the setting, so changing it has no effect yet.
+
+## Tenants and enquiries
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `tenant.free_contact_credits` | 5 | Free contact credits per tenant, for life |
+| `enquiry.post_expiry_access_days` | 90 | Days a tenant keeps an enquiry after the listing expires *(not used yet)* |
+| `rate.enquiry_user_per_hour` | 10 | Enquiries per tenant per hour *(not used yet)* |
+| `rate.enquiry_user_per_day` | 30 | Enquiries per tenant per day *(not used yet)* |
+
+## Owners and listings
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `owner.free_listing_days` | 30 | Days a Free listing runs from approval |
+| `owner.free_reveals_per_listing` | 2 | Enquiries an owner can reveal on a Free listing *(not used yet)* |
+| `listing.expiry_reminder_days` | 3 | Days before expiry that the lister is reminded *(fixed in code at 3)* |
+| `listing.sensitive_price_change_pct` | 20 | Price change that sends a live listing back to review *(not used yet: live edits aren't built)* |
+| `listing.unit_anchor_lookback_days` | 180 | Window for keeping a relisted flat's original freshness date *(fixed in code at 180)* |
+| `pg.availability_confirm_days` | 7 | Days between PG check-in reminders *(fixed in code at 7)* |
+| `pg.availability_alert_days` | 60 | Days without check-in before staff are alerted *(not used yet)* |
+| `reports.autopause_threshold` | 3 | Open reports that pause a listing *(not used yet)* |
+
+## Moderation and disputes
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `moderation.agent_reviewed_listings` | 5 | An agent's listings reviewed before they're trusted |
+| `moderation.pg_trusted_after_days` | 30 | Days after which a PG lister is trusted *(not used yet: every PG is reviewed)* |
+| `moderation.review_target_hours` | 24 | Target time to review a listing *(not used yet)* |
+| `dispute.proof_window_hours` | 48 | Hours the agent has to send proof |
+
+## Money and services
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `coupon.max_discount_bp` | 4000 (40%) | Highest coupon discount without finance approval *(fixed in code at 40%)* |
+| `entitlements.max_staff_grant_amount` | 100 | Most one staff grant may give |
+| `services.shoot_validity_after_plan_days` | 7 | Days a shoot stays valid after the plan is bought *(not used yet)* |
+| `services.remedy_working_days` | 15 | Working days to fix a failed service *(not used yet)* |
+| `analytics.benchmark_min_listings` | 5 | Listings in a locality before benchmarks show *(not used yet)* |
+
+## Sign-in and limits
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `otp.length` | 6 | Digits in a sign-in code |
+| `otp.daily_global_budget` | 2,000 | Sign-in SMS across all users per day (placeholder value) |
+| `rate.otp_resend_seconds` | 30 | Wait before the same number can ask again |
+| `rate.otp_phone_per_hour` / `per_day` | 5 / 10 | Codes per number |
+| `rate.otp_ip_per_hour` | 20 | Codes per network address |
+| `rate.form_ip_per_hour` | 5 | Public form submissions per address per form |
+| `rate.public_read_ip_per_minute` | 120 | Search and public reads per address |
+| `rate.write_user_per_minute` | 60 | Signed-in writes per user |
+
+## Chat and feature switches
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `features.chat_enabled` | on | In-app chat *(not built)* |
+| `features.reviews_enabled` | on | Reviews *(not built)* |
+| `features.matching_enabled` | off | Tenant-to-listing matching (placeholder value) *(not built)* |
+| `chat.max_per_conversation_hour` | 30 | *(not built)* |
+| `chat.max_per_day` | 200 | *(not built)* |
+| `chat.email_after_minutes` | 15 | *(not built)* |
+| `chat.retention_months` | 12 | *(not built)* |
+| `search.allocation.apply_on_explicit_sort` | off | Whether paid placement applies when the user picks a sort *(not built)* |
+
+## Other things staff can change
+
+| What | Who | Notes |
+| --- | --- | --- |
+| Plans and plan versions | Admin, super admin | Price changes need a super admin. See [Plans & pricing](../money/plans-and-pricing.mdx#plan-versions). |
+| Coupons | Admin, finance, super admin | See [Coupons](../money/coupons.mdx) |
+| Cities, localities, landmarks, societies | Admin, moderator, super admin | Deactivated, never deleted. Societies can be merged. |
+| Amenities | Admin, moderator, super admin | Deactivated, never deleted |
+| Ranking configuration | Super admin | Versioned; quality score weights and thresholds |
+| Notification templates | Admin, super admin | Versioned |
+
+## Staff overrides
+
+Support, finance, admin and super admin can **grant** a customer credits with a reason, up to the grant limit:
+
+| Grant | Gives back |
+| --- | --- |
+| Tenant credits | Contact credits |
+| Restore matching | Matching recommendations |
+| Restore boost | A rank boost |
+| Restore shoot | A photo shoot |
+
+Staff can see a user's entitlements and their use, and **revoke the unused part** of a grant with a reason.

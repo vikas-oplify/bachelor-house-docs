@@ -1,0 +1,71 @@
+.card {
+  container: glance / inline-size;
+  border: 1px solid var(--bh-line);
+  border-radius: 16px;
+  padding: 1rem 1.1rem 1.1rem;
+  background: var(--ifm-background-color);
+  box-shadow: var(--bh-shadow);
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.head {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bh-muted);
+}
+.headline {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--bh-ink);
+  text-wrap: balance;
+}
+.headline small {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--bh-muted);
+  letter-spacing: 0;
+}
+/* Narrow (the right-hand column): each label sits above its value.
+   Wide (phones, where the card spans the content): label and value side by side. */
+.kv {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.1rem;
+  margin: 0;
+  font-size: 0.85rem;
+}
+.kv dt {
+  color: var(--bh-muted);
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+.kv dd {
+  margin: 0 0 0.45rem;
+  font-weight: 600;
+  color: var(--bh-ink);
+}
+@container glance (min-width: 340px) {
+  .kv {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.45rem 0.9rem;
+    align-items: baseline;
+  }
+  .kv dt {
+    font-size: inherit;
+  }
+  .kv dd {
+    margin: 0;
+    text-align: right;
+  }
+}
+.cta {
+  justify-self: stretch;
+  border-color: var(--bh-line);
+}

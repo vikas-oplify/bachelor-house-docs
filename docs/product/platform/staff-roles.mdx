@@ -1,0 +1,68 @@
+---
+title: Staff roles
+sidebar_position: 1
+description: The six staff roles, how staff sign in, and what each role can do.
+glance:
+  headline: 6 roles
+  unit: 22 permissions
+  rows:
+    - [Sign-in, Google account]
+    - [Session, Ends 8 hours after sign-in]
+    - [Adds staff, Super admin]
+    - [Admin website, Not built]
+  backend: built
+  website: none
+---
+
+# Staff roles
+
+BachelorHouse staff sign in to a separate admin area with their **Google account**. A staff session ends **8 hours after sign-in**, however active it is. There's no admin website yet; everything below is available through the admin API.
+
+A **super admin** adds staff and gives them one or more roles. Changing someone's roles or disabling them **ends their sessions** straight away. Every staff action that changes something is written to the audit log with a reason.
+
+## Roles
+
+| Role | In short |
+| --- | --- |
+| **Super admin** | Everything, including settings, staff, ranking and price changes |
+| **Admin** | Runs the platform day to day: moderation, plans, coupons, content, notifications, audit |
+| **Moderator** | Reviews listings, media, KYC and agents; manages places and amenities |
+| **Support** | Helps customers: users, enquiries, the support inbox, credit grants |
+| **Finance** | Payments, refunds, coupons (including approving big discounts), grants, dashboards |
+| **Content editor** | Blogs, news, FAQs, banners, testimonials, jobs, static pages |
+
+## What each role can do
+
+| Permission | Super admin | Admin | Moderator | Support | Finance | Content |
+| --- | :-: | :-: | :-: | :-: | :-: | :-: |
+| Moderate listings | ✓ | ✓ | ✓ | | | |
+| Review KYC | ✓ | ✓ | ✓ | | | |
+| Review agents | ✓ | ✓ | ✓ | | | |
+| See users | ✓ | ✓ | ✓ | ✓ | ✓ | |
+| Manage users | ✓ | ✓ | | ✓ | | |
+| See a user's contact details | ✓ | ✓ | ✓ | ✓ | ✓ | |
+| See enquiries | ✓ | ✓ | | ✓ | | |
+| Support inbox (contact, feedback, careers, advertise) | ✓ | ✓ | | ✓ | | |
+| Manage services (shoots) | ✓ | ✓ | ✓ | ✓ | | |
+| See payments | ✓ | ✓ | | ✓ | ✓ | |
+| Refund payments | ✓ | ✓ | | | ✓ | |
+| Grant credits | ✓ | ✓ | | ✓ | ✓ | |
+| Manage plans | ✓ | ✓ | | | | |
+| Manage coupons | ✓ | ✓ | | | ✓ | |
+| Ranking configuration | ✓ | | | | | |
+| Places and amenities | ✓ | ✓ | ✓ | | | |
+| Content (CMS) | ✓ | ✓ | | | | ✓ |
+| Notification templates | ✓ | ✓ | | | | |
+| Dashboards | ✓ | ✓ | | | ✓ | |
+| Audit log | ✓ | ✓ | | | | |
+| Settings | ✓ | | | | | |
+| Staff | ✓ | | | | | |
+
+Two extra rules sit on top: publishing a **plan price change** needs a super admin, and a coupon over **40%** needs a finance user or super admin to approve it.
+
+## Edge cases worth testing
+
+- Support user tries to change a setting: forbidden.
+- Disable a moderator who is signed in: their next request fails.
+- Session 8 hours and 1 minute after sign-in: must sign in again.
+- An admin publishes a draft plan version with a new price: refused.

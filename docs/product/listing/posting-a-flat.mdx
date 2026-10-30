@@ -1,0 +1,102 @@
+---
+title: Posting a flat
+sidebar_position: 1
+description: The 5-step form an owner or agent fills to list a flat, and the rules on each field.
+glance:
+  headline: 5 steps
+  unit: saved one at a time
+  rows:
+    - [Who, Owners and agents]
+    - [Photos, 5 to 20, one cover]
+    - [Video, Up to 1]
+    - [Drafts, Saved per step]
+  backend: built
+  website: screen
+  journey: /journeys/owner-lists-a-flat
+---
+
+# Posting a flat
+
+An owner or agent lists a flat (the backend calls it a **residential** listing) through a 5-step form. Each step is saved on its own, so the lister can stop and come back. Nothing goes public until the lister [submits](./submission-and-review.mdx) and the listing passes review.
+
+The website form is at `/post-property` and matches these steps, but it doesn't save anything yet.
+
+## The steps
+
+| # | Step | What the lister enters |
+| --- | --- | --- |
+| 1 | **Basic** | Title, property type, BHK, bathrooms, balconies, floor, facing, area, pets and non-veg rules |
+| 2 | **Location** | City, locality, society, landmark, address, map pin |
+| 3 | **Rental** | Rent, deposit, maintenance, available-from date, preferred tenant, furnishing, parking, description |
+| 4 | **Amenities** | Society and flat amenities from the amenity list, with quantities |
+| 5 | **Photos** | 5 to 20 tagged photos with one cover, and an optional video |
+
+Steps can be saved in any order. Submit checks them all again.
+
+## Field rules
+
+### 1. Basic
+
+| Field | Rule |
+| --- | --- |
+| Title | 10 to 100 characters. No phone numbers, emails or links. |
+| Property type | Apartment, independent house, independent floor, duplex, villa, penthouse, studio, farm house, other |
+| BHK | 1 RK, 1 to 5 BHK, or "more than 5" |
+| Bathrooms | 1 to 20 |
+| Floor | Ground (0) to 50, and not above the building's total floors |
+| Facing | One of the 8 compass directions |
+| Built-up area | Required, in sq ft. Carpet area is optional and can't be larger. |
+| Age of property | Optional: under 1 year, 1–3, 3–5, 5–10, over 10 |
+| Pets, non-veg | Yes or no, both required |
+
+### 2. Location
+
+| Field | Rule |
+| --- | --- |
+| City | Must be an active city. Pune is the only city seeded today. |
+| Locality | Pick one from the list, or type a new name for staff to review |
+| Society | Pick a known society, or type its name |
+| Landmark | Required, 2 to 200 characters |
+| House number, tower, address line | Optional and **private**: never shown publicly |
+| Pincode | Optional, 6 digits |
+| Map pin | Optional. The exact pin is private; the public map shows a pin moved 50 to 300 m in a random direction. |
+
+### 3. Rental
+
+| Field | Rule |
+| --- | --- |
+| Rent | Rupees per month, at least ₹1. Can be marked negotiable. |
+| Deposit | Required, can be ₹0 |
+| Maintenance | Included in rent, or extra. If extra, the monthly amount is required. |
+| Available from | A date, today or later (IST) |
+| Preferred tenant | Male, female or any |
+| Furnishing | Fully furnished, semi-furnished, unfurnished |
+| Parking | Car, bike, both or none, with optional covered and open counts |
+| Brokerage | **Agents only.** An owner who sends a brokerage gets an error. |
+| Description | 20 to 1,000 characters. No phone numbers, emails or links. |
+
+### 4. Amenities
+
+Codes from the amenity list that staff manage. Up to 100, each with a quantity of 1 to 20. Unknown or inactive codes are refused.
+
+### 5. Photos and video
+
+Photos are uploaded first, then attached to the listing. See [Photos and video](./photos-and-video.mdx). To submit, the listing needs **5 to 20 photos, every photo tagged** (bedroom, living room, kitchen, bathroom, balcony, dining, exterior, other) and **exactly one cover**. One video is allowed.
+
+:::note[Rule · No contact details in text]
+The title, landmark and description are checked for phone numbers, emails and links when each step is saved, and again at submit. Contact goes through BachelorHouse, never the listing text.
+:::
+
+## Saving drafts safely
+
+Every save carries the draft's version number. If two tabs edit the same draft, the second save is refused with a "draft changed" error instead of silently overwriting the first. The lister reloads and saves again.
+
+## Edge cases worth testing
+
+- Floor 12 with total floors 10: refused on the floor field.
+- Carpet area larger than built-up area: refused.
+- Maintenance "extra" with no amount, or "included" with an amount: both refused.
+- Available-from date of yesterday in IST, especially just after midnight.
+- An owner account sending a brokerage amount.
+- A phone number written as words or with spaces in the description.
+- The same draft saved from two browser tabs.

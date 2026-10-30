@@ -1,0 +1,89 @@
+---
+title: What's built today
+sidebar_position: 2
+description: Feature-by-feature status of the BachelorHouse backend and website.
+---
+
+# What's built today
+
+BachelorHouse is mid-build. The backend has most of the listing, review, KYC, checkout and account rules in place. The tenant side of the marketplace (search, enquiries, chat) is not built. The website has the main screens, but **none of them call the backend yet**: every form is UI only.
+
+Checked on 30 Oct 2026 against:
+
+| Repo | Branch | Latest change |
+| --- | --- | --- |
+| bachelor-house-backend | `chore/scaffold-from-reference` | `c4bcee6` · ownership disputes (T-247), 29 Oct |
+| bachelor-house-client | `main` | `f86531b` · footer pages, 15 Oct |
+
+## Legend
+
+| Pill | Meaning |
+| --- | --- |
+| <Status s="built" /> | Works end to end in the backend. You can call it and the rule holds. |
+| <Status s="partial" /> | Some of it works. The linked page says which part. |
+| <Status s="screen" /> | A website screen exists but is not connected to the backend. |
+| <Status s="none" /> | Not built. Rules may be decided, but there is no code. |
+
+There is **no admin website**. Everything staff do today is through the admin API.
+
+## Feature status
+
+### Accounts
+
+| Feature | Backend | Website | Notes |
+| --- | --- | --- | --- |
+| [Sign in with phone OTP](./accounts/sign-in-and-profile.mdx) | <Status s="built" /> | <Status s="screen" /> | Login, signup and OTP screens exist |
+| [Profile, consents, email check](./accounts/sign-in-and-profile.mdx) | <Status s="built" /> | <Status s="screen" /> | Part of the signup screen |
+| [Change phone number](./accounts/sign-in-and-profile.mdx#changing-your-phone-number) | <Status s="built" /> | <Status s="none" /> | |
+| [Signed-in devices](./accounts/sign-in-and-profile.mdx#sessions-and-devices) | <Status s="built" /> | <Status s="none" /> | |
+| [Notifications and preferences](./accounts/notifications.mdx) | <Status s="partial" /> | <Status s="screen" /> | Email, SMS, WhatsApp, push and in-app are all wired. Only email and in-app messages have templates today, plus the OTP text. Unsubscribe screen exists |
+| [Account deletion and data requests](./accounts/privacy-and-deletion.mdx) | <Status s="built" /> | <Status s="none" /> | |
+
+### Listing a property
+
+| Feature | Backend | Website | Notes |
+| --- | --- | --- | --- |
+| [Post a flat (5 steps)](./listing/posting-a-flat.mdx) | <Status s="built" /> | <Status s="screen" /> | `/post-property` |
+| [Post a PG (6 steps)](./listing/posting-a-pg.mdx) | <Status s="built" /> | <Status s="screen" /> | `/pg/post-property` |
+| [Photos and video](./listing/photos-and-video.mdx) | <Status s="built" /> | <Status s="screen" /> | Upload, resize, watermark, video transcode |
+| [Submit and review](./listing/submission-and-review.mdx) | <Status s="partial" /> | <Status s="none" /> | Works for Free owner listings. Paid plans don't attach to listings yet |
+| [Quality score](./listing/quality-score.mdx) | <Status s="built" /> | <Status s="none" /> | |
+| [Free listing](./listing/free-listing.mdx) | <Status s="built" /> | <Status s="none" /> | |
+| [Pause, rented, archive, reactivate, expiry](./listing/listing-lifecycle.mdx) | <Status s="built" /> | <Status s="none" /> | The owner dashboard is not designed yet |
+| [PG KYC](./listing/pg-kyc.mdx) | <Status s="built" /> | <Status s="screen" /> | KYC step in the PG form |
+| Edit a live listing | <Status s="none" /> | <Status s="none" /> | Only drafts can be edited |
+
+### Tenants
+
+| Feature | Backend | Website | Notes |
+| --- | --- | --- | --- |
+| [Search and listing pages](./tenants/search-and-places.mdx) | <Status s="none" /> | <Status s="screen" /> | Screens show sample data. Place autocomplete and "use my location" are built |
+| [Contacting a lister](./tenants/contacting-a-lister.mdx) | <Status s="none" /> | <Status s="screen" /> | Rules are decided. The credit ledger exists; the enquiry flow does not |
+| [PG room alerts](./tenants/pg-room-alerts.mdx) | <Status s="built" /> | <Status s="none" /> | |
+| Wishlist, chat, reviews, reports | <Status s="none" /> | <Status s="screen" /> | Buttons on screens do nothing |
+
+### Agents
+
+| Feature | Backend | Website | Notes |
+| --- | --- | --- | --- |
+| [Agent listings and slots](./agents/agent-listings.mdx) | <Status s="partial" /> | <Status s="screen" /> | Agents can draft but can't submit: there is no agent profile or approval yet |
+| [Ownership disputes](./agents/ownership-disputes.mdx) | <Status s="built" /> | <Status s="none" /> | |
+
+### Plans and money
+
+| Feature | Backend | Website | Notes |
+| --- | --- | --- | --- |
+| [Plan catalogue](./money/plans-and-pricing.mdx) | <Status s="built" /> | <Status s="screen" /> | Website prices for owner and agent plans differ from the catalogue |
+| [Checkout, GST, billing profile](./money/checkout-and-gst.mdx) | <Status s="partial" /> | <Status s="none" /> | Razorpay orders and verify work. GST invoices (Zoho) and refunds are queued but nothing processes them |
+| [Coupons](./money/coupons.mdx) | <Status s="built" /> | <Status s="none" /> | |
+
+### Platform and staff
+
+| Feature | Backend | Website | Notes |
+| --- | --- | --- | --- |
+| [Staff sign-in and roles](./platform/staff-roles.mdx) | <Status s="built" /> | <Status s="none" /> | Google sign-in for staff |
+| [Moderation queue](./platform/moderation.mdx) | <Status s="partial" /> | <Status s="none" /> | Listings, media and KYC decisions act. Other subjects are recorded only |
+| [Plans, settings, coupons admin](./platform/configurable-rules.mdx) | <Status s="built" /> | <Status s="none" /> | |
+| [Content and forms](./platform/content-and-forms.mdx) | <Status s="built" /> | <Status s="screen" /> | Blogs, FAQs, careers, contact, feedback, newsletter |
+| Owner dashboard | <Status s="none" /> | <Status s="none" /> | 8 Figma frames, deferred |
+| Staff dashboards and analytics | <Status s="none" /> | <Status s="none" /> | |

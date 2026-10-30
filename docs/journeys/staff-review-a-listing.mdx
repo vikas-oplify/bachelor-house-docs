@@ -1,0 +1,63 @@
+---
+title: Staff review a listing
+sidebar_position: 7
+description: A moderator's journey through the review queue, from sign-in to a decision the lister sees.
+---
+
+# Staff review a listing
+
+Neha is a BachelorHouse moderator. Ravi's PG from the [PG journey](./pg-lists-a-pg.mdx) is waiting. There's no admin website yet, so every step below is an admin API call.
+
+<JourneyRail
+  steps={[
+    { title: "Sign in", text: "Google, 8 h session", s: "built", href: "#1-sign-in-with-google" },
+    { title: "Open the queue", text: "Oldest first", s: "built", href: "#2-open-the-queue" },
+    { title: "Claim", text: "30 minutes", s: "built", href: "#3-claim-the-item" },
+    { title: "Check KYC", text: "60-second file links", s: "built", href: "#4-check-the-kyc" },
+    { title: "Decide", text: "With a note", s: "built", href: "#5-decide" },
+    { title: "Lister told", text: "In-app message", s: "built", href: "#6-the-lister-is-told" },
+    { title: "Refund", text: "If rejected after paying", s: "partial", href: "#7-refund-if-needed", paid: true },
+  ]}
+/>
+
+## 1. Sign in with Google
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+She signs in with her Google account. Her session ends **8 hours** after sign-in. A super admin gave her the **moderator** role. [Staff roles](../product/platform/staff-roles.mdx)
+
+## 2. Open the queue
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+She sees listings, media and KYC items, oldest and highest priority first. Ravi's PG is there with the reason `pg`. A support colleague wouldn't see listing items at all.
+
+## 3. Claim the item
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+She claims it for **30 minutes**. Another moderator trying to claim it is refused. If she walks away, it goes back to the queue automatically.
+
+## 4. Check the KYC
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+She opens Ravi's KYC submission, which lists the documents with no links. She asks for a **60-second link** to each file, with a reason; each request is audited. She approves the KYC. [PG KYC](../product/listing/pg-kyc.mdx)
+
+## 5. Decide
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+She **approves** the listing with a reason code and a note. The PG goes live, its 30 Free days start, and the Free allowance is used. She could instead request changes, reject or suspend. [Moderation](../product/platform/moderation.mdx)
+
+## 6. The lister is told
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+Ravi gets an in-app message, and the listing history shows the change with her note.
+
+## 7. Refund if needed
+
+**Backend** <Status s="partial" /> · **Website** <Status s="none" />
+
+Had she rejected a listing Ravi had paid a plan for (before it ever went live), a full refund would be queued. Nothing processes refunds yet, so finance would pay it manually.

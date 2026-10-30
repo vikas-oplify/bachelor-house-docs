@@ -1,0 +1,77 @@
+---
+title: Checkout and GST
+sidebar_position: 2
+description: How a purchase is priced, paid through Razorpay and fulfilled once, with GST.
+glance:
+  headline: 18% GST
+  unit: CGST + SGST or IGST
+  rows:
+    - [Payment, Razorpay, one-time]
+    - [Order expires, 30 minutes]
+    - [Open orders, 1 per listing, city or account]
+    - [Invoices, Zoho (not processed yet)]
+  backend: partial
+  website: none
+  journey: /journeys/buying-a-plan
+---
+
+# Checkout and GST
+
+Every amount is worked out on the server from the plan version and the buyer's billing state. Nothing the browser sends can change the price. Card details never reach BachelorHouse; Razorpay handles the payment.
+
+:::info[What works today]
+Pricing, coupons, the Razorpay order, payment verification and fulfilment work. **GST invoices** (via Zoho), **Razorpay webhooks**, **reconciliation** and **refunds** are queued or planned, but nothing processes them yet. A bought owner or PG plan is recorded, but isn't yet connected to listing submit.
+:::
+
+## Steps
+
+1. **Billing profile (optional).** The buyer saves a billing name, address, state and an optional GSTIN.
+2. **Check a coupon (optional).** The website can price a plan with a coupon to show the total. This reserves nothing.
+3. **Create the order.** The server picks the published plan version, checks the buyer can buy it, applies the coupon, computes GST and creates a Razorpay order. The order number looks like `BHO-261030-00042`.
+4. **Pay** in the Razorpay checkout.
+5. **Verify.** The website sends Razorpay's callback. The server checks the signature, fetches the payment from Razorpay, and **fulfils the order once**: the plan starts, the coupon is used. A repeat call returns the same result.
+
+## Who can buy what
+
+| Account | Can buy | Bought for |
+| --- | --- | --- |
+| Tenant | Tenant packages | Their account |
+| Owner | Owner plans, PG plans | One of their listings (or unassigned) |
+| Agent | Agent plans, PG plans | One city, or one PG listing |
+
+## GST
+
+| Buyer's state | Tax |
+| --- | --- |
+| Maharashtra (BachelorHouse's registered state) | CGST 9% + SGST 9% |
+| Any other state | IGST 18% |
+
+The **place of supply** is the billing profile's state. Without a profile, it's the listing's state, or Maharashtra. Tax is rounded half up to the paisa on each line.
+
+### GSTIN
+
+A GSTIN is optional. When given, it's checked for format, checksum and state code, and the billing state must match its first two digits. The billing name, address and GSTIN are personal data: they're erased if the account is deleted, but issued invoices are kept (by law, for 8 years).
+
+## Safety rules
+
+| Rule | Detail |
+| --- | --- |
+| One open order at a time | Per listing, per agent city, or per account plan. Asking again returns the buyer's existing open order. |
+| Orders expire | An unpaid order expires after **30 minutes** and releases its coupon. A job checks every 5 minutes. |
+| Minimum | Razorpay won't take an order under ₹1, so a coupon that would bring the total below that is refused |
+| Same plan twice | Buying the tier that's already running is refused (`PLAN_ALREADY_ACTIVE`), except for tenant packages |
+| Paid but not yet captured | Shown as "Pending verification" |
+| Money for a closed order | If a payment arrives for an expired or failed order, it's flagged for finance instead of starting a plan |
+| Deleting your account | Blocked while an order is being paid or a paid order isn't fulfilled yet |
+
+## Refunds
+
+If staff **reject a listing that never went live**, any paid order for it is queued for a **full refund**. The refund job isn't built yet, so refunds today are manual.
+
+## Edge cases worth testing
+
+- Two tabs both press Buy on one listing: one order, returned to both.
+- Pay after 31 minutes: the payment is flagged, no plan starts.
+- Call verify twice: same result, one plan.
+- GSTIN starting `27` with a Karnataka billing state: refused.
+- Billing profile in Karnataka: IGST. In Maharashtra: CGST + SGST.

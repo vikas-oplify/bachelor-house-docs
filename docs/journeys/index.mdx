@@ -1,0 +1,33 @@
+---
+title: Journeys
+slug: /journeys
+sidebar_position: 1
+sidebar_label: All journeys
+description: Every step a tenant, owner, PG lister, agent or staff member goes through today, and which steps work.
+---
+
+# Journeys
+
+Each journey follows one person from the first screen to the end of what they can do today. Every step shows **two statuses**: the backend (does the rule work?) and the website (is there a screen?). Steps where money or a credit changes hands are drawn in **gold**.
+
+Use these to plan a release, write an end-to-end test, or explain the product to someone new.
+
+| Journey | Who | Today |
+| --- | --- | --- |
+| [Owner lists a flat](./owner-lists-a-flat.mdx) | Owner | <Status s="built" /> Works through approval. Tenants can't see the listing yet. |
+| [PG lister lists a PG](./pg-lists-a-pg.mdx) | Owner or agent | <Status s="built" /> Works for owners, through approval and room upkeep |
+| [Tenant finds a home](./tenant-finds-a-home.mdx) | Tenant | <Status s="partial" /> Sign-in and room alerts work. Search and contact don't. |
+| [Agent lists for owners](./agent-lists-for-owners.mdx) | Agent | <Status s="partial" /> Drafts and city plans work. Submit is blocked. |
+| [Buying a plan](./buying-a-plan.mdx) | Anyone | <Status s="partial" /> Payment works. The plan doesn't take effect yet. |
+| [Staff review a listing](./staff-review-a-listing.mdx) | Moderator | <Status s="built" /> Works end to end, through the admin API |
+| [Leaving BachelorHouse](./leaving-bachelorhouse.mdx) | Anyone | <Status s="built" /> Works end to end |
+
+## Reading a step
+
+Each step has a line like this:
+
+> **Backend** <Status s="built" /> · **Website** <Status s="screen" />
+
+<Status s="built" /> works in the backend · <Status s="partial" /> some of it works · <Status s="screen" /> a screen exists, not connected · <Status s="none" /> not built.
+
+The website column will read "screen only" for almost everything until the website is connected to the backend.

@@ -1,0 +1,82 @@
+---
+title: PG lister lists a PG
+sidebar_position: 3
+description: Every step for a PG lister, from the 6-step form and KYC to keeping rooms up to date.
+---
+
+# PG lister lists a PG
+
+Ravi runs a 20-room boys' PG in Hadapsar with double and triple rooms. He signs up as an owner. This is every step he goes through today.
+
+<JourneyRail
+  steps={[
+    { title: "Sign in", text: "Owner account", s: "built", href: "#1-sign-in-as-an-owner" },
+    { title: "Basic + rooms", text: "Sharing types, configs", s: "built", href: "#2-describe-the-pg-and-its-rooms" },
+    { title: "Photos", text: "Building + each sharing type", s: "built", href: "#3-photos" },
+    { title: "KYC", text: "ID, ownership, selfie", s: "built", href: "#4-kyc" },
+    { title: "Submit", text: "Always reviewed", s: "built", href: "#5-submit" },
+    { title: "Review", text: "Listing and KYC", s: "built", href: "#6-review" },
+    { title: "Live", text: "Free 30 days", s: "partial", href: "#7-live" },
+    { title: "Rooms upkeep", text: "Full / free, alerts", s: "built", href: "#8-keep-rooms-up-to-date" },
+    { title: "Weekly check-in", text: "Every 7 days", s: "built", href: "#9-weekly-check-in" },
+  ]}
+/>
+
+## 1. Sign in as an owner
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> `/signup`
+
+Same as any owner: phone OTP, then the profile as **owner**. An agent account can also list a PG, but [needs a PG plan and approval](./agent-lists-for-owners.mdx).
+
+## 2. Describe the PG and its rooms
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> `/pg/post-property` with the room pop-up
+
+- **Basic:** PG name, contact name, gender (male), tenant type, notice and lock-in days, 20 rooms: 12 double and 8 triple.
+- **Location:** city, a locality picked from the list (he can't type a new one), address.
+- **Rooms:** one entry per configuration, e.g. "Double with AC" ₹6,500 per bed, 6 rooms, 2 free. The double configurations add up to 12.
+- **Amenities:** house rules, services, security, meals.
+
+[Field rules](../product/listing/posting-a-pg.mdx)
+
+## 3. Photos
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" />
+
+He sorts photos into categories. He needs at least one **building** photo, one **double room** and one **triple room** photo, at most 3 per category and 20 in all. A private-room photo would be refused because he doesn't offer private rooms.
+
+## 4. KYC
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> KYC step of `/pg/post-property`
+
+He uploads his **ID proof** (only the last 4 characters of the number are kept), **ownership proof** and a **selfie at the PG**. Files go to a private store. If he lists a second PG at the same address later, this KYC covers it. [PG KYC](../product/listing/pg-kyc.mdx)
+
+## 5. Submit
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+The same checks as a flat. His [Free listing](../product/listing/free-listing.mdx) is reserved. **Every PG goes to review.** If his KYC isn't approved yet, the listing carries a "KYC pending" blocker.
+
+## 6. Review
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" /> (admin API only)
+
+A moderator reviews the KYC (through 60-second file links) and the listing. Approving the KYC lifts the blocker; approving the listing puts it live. Rejecting the KYC of a PG that's already live hides it until a new KYC is approved.
+
+## 7. Live
+
+**Backend** <Status s="partial" /> · **Website** <Status s="screen" /> `/pg`, `/pg/properties` with sample data
+
+Live for **30 days from approval** on the Free listing. As with flats, there's no search or detail API yet, so tenants can't find it. After 30 days he needs a PG plan (PG Start ₹1,499 and up), which [doesn't attach to listings yet](../product/known-limitations.md).
+
+## 8. Keep rooms up to date
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+He changes "rooms free" per configuration whenever a bed fills or opens. **No new review**, and his plan clock isn't touched. When the last room fills, the PG is **full**: tenants can set a [room alert](../product/tenants/pg-room-alerts.mdx). When he opens a room again, each waiting tenant gets one in-app message.
+
+## 9. Weekly check-in
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+Every **7 days** without a confirmation he gets an in-app reminder at 10:00 IST. One tap confirms. Without it, the PG shows "Availability not recently verified" and its quality score's availability points drop after 15 days.

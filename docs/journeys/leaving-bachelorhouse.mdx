@@ -1,0 +1,51 @@
+---
+title: Leaving BachelorHouse
+sidebar_position: 8
+description: Raising a data request and deleting an account, and what BachelorHouse keeps.
+---
+
+# Leaving BachelorHouse
+
+Arjun found a flat and wants his data gone. This journey works end to end in the backend; the website has no screens for it yet.
+
+<JourneyRail
+  steps={[
+    { title: "Ask for his data", text: "Optional", s: "built", href: "#1-ask-what-bachelorhouse-holds" },
+    { title: "Delete account", text: "Not mid-payment", s: "built", href: "#2-delete-the-account" },
+    { title: "Hidden at once", text: "Signed out everywhere", s: "built", href: "#3-straight-away" },
+    { title: "Erased", text: "After 30 days", s: "built", href: "#4-after-30-days" },
+    { title: "What's kept", text: "Invoices, number hash", s: "built", href: "#5-what-stays" },
+  ]}
+/>
+
+## 1. Ask what BachelorHouse holds
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+He can raise an **access** request first (or correction, consent withdrawal, grievance). It's due in 30 days and he can see its status. [Privacy and deletion](../product/accounts/privacy-and-deletion.mdx)
+
+## 2. Delete the account
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+He asks to delete his account. If he has a payment in progress or a paid order not yet fulfilled, it's refused until that settles.
+
+## 3. Straight away
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+His account is closed, any listings are taken off the site, every device is signed out, and his phone number is freed.
+
+## 4. After 30 days
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+A daily job erases his name, email, billing details, uploads, KYC files and newsletter subscriptions. Staff can do it sooner by closing his erasure request.
+
+## 5. What stays
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+- His orders, payments and invoices, for 8 years by law.
+- A one-way hash of his number in the free-allowance record. If he signs up again, he starts with **no** free credits.
+- The audit log, which was masked when written.

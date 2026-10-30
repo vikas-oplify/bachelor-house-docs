@@ -1,0 +1,42 @@
+---
+title: PG room alerts
+sidebar_position: 2
+description: A tenant asks to be told when a full PG has a room again.
+glance:
+  headline: Free
+  unit: no credit used
+  rows:
+    - [Who, Tenants only]
+    - [Only on, A full PG]
+    - [Lasts, 60 days]
+    - [Notified, Once]
+  backend: built
+  website: none
+---
+
+# PG room alerts
+
+When a PG is **full** (it has rooms, but none free), a tenant can tap **Notify me**. When the lister next marks a room free, every tenant waiting on that PG gets an in-app message. It costs no credit.
+
+## Rules
+
+| Rule | Detail |
+| --- | --- |
+| Who | Tenant accounts only |
+| Where | Only on a PG that is full. On a PG with a free room: `LISTING_NOT_FULL`. |
+| How long | 60 days from when it was set |
+| Setting it again | An open alert is left as it is. A sent or expired one starts a fresh 60 days. |
+| Cancelling | The tenant can cancel at any time |
+
+## What triggers the message
+
+1. The lister changes a room configuration's free rooms from 0 to 1 or more, and the PG goes from full to available.
+2. A job sends each tenant with an open alert one message ("availability opened") and marks the alert as sent.
+3. If the PG fills up again or isn't live when the job runs, nothing is sent. A daily sweep at 10:30 IST catches any trigger lost to a queue outage.
+
+## Edge cases worth testing
+
+- Owner account tries to set an alert: refused.
+- Set an alert on a PG with 1 free room: `LISTING_NOT_FULL`.
+- Lister opens a room, closes it, opens it again: each tenant is notified once.
+- Alert set 61 days ago, room opens: no message.

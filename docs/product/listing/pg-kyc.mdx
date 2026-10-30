@@ -1,0 +1,65 @@
+---
+title: PG KYC
+sidebar_position: 8
+description: The identity and ownership proof a PG lister sends, how staff review it, and how long files are kept.
+glance:
+  headline: 3 documents
+  unit: per PG address
+  rows:
+    - [Who, PG listers]
+    - [Staff file link, 60 seconds]
+    - [Files deleted, 180 days after decision]
+    - [ID number kept, Last 4 characters only]
+  backend: built
+  website: screen
+  journey: /journeys/pg-lists-a-pg
+---
+
+# PG KYC
+
+Every PG lister proves who they are and that they run the PG. It's the last step of the [PG form](./posting-a-pg.mdx). Staff review it before the PG can go live.
+
+## What the lister sends
+
+All three are required:
+
+| Document | What it is |
+| --- | --- |
+| **ID proof** | A government ID. Only the **last 4 characters** of the ID number are stored. The form has no field for the full number. |
+| **Ownership proof** | Proof the lister owns or runs the property at the PG's address |
+| **Selfie at the property** | A photo of the lister at the PG |
+
+Files go to a **private store** separate from listing photos. Customers never get a link to a KYC file, not even their own.
+
+## One KYC per address
+
+An approved KYC covers **every PG at the same address**. Addresses are compared in a normalised form (lower case, letters and digits only), so "Flat 4, Baner Rd." and "flat 4 baner rd" match. A lister adding a second PG at an approved address doesn't send documents again.
+
+## Staff review
+
+KYC submissions go to a queue, oldest first, and can also be decided from the main [moderation queue](../platform/moderation.mdx). Staff with KYC review rights (super admin, admin, moderator):
+
+1. Open the submission. It lists the documents with no file links.
+2. Ask for a **60-second link** to one file. Every link is audited with who asked and why. No link is handed out without that record.
+3. **Approve** or **reject** with a reason. The reason is shown to the lister on a rejection.
+
+| Decision | Effect on the PGs that use this KYC |
+| --- | --- |
+| Approve | The KYC-pending blocker is lifted |
+| Reject | PGs still in review are flagged. A PG **already live is hidden** until a new KYC is approved. |
+
+## Retention
+
+Files are deleted **180 days after the decision** by a daily job. The record stays (document type, last 4 characters, decision), and the listing shows the files as purged.
+
+## Other uses of the same KYC system
+
+The same store and review flow hold agent identity, business, RERA and authorisation proofs, and the proofs in [ownership disputes](../agents/ownership-disputes.mdx).
+
+## Edge cases worth testing
+
+- Send a full Aadhaar number: refused.
+- Send only 2 of the 3 documents: refused.
+- Second PG at the same address typed differently: no new documents needed.
+- Reject the KYC of a live PG: it disappears from the site.
+- Ask for a file link after the files were purged: no link.

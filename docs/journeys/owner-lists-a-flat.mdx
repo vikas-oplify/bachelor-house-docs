@@ -1,0 +1,98 @@
+---
+title: Owner lists a flat
+sidebar_position: 2
+description: Every step from an owner's first sign-in to a live Free listing, and what happens after.
+---
+
+# Owner lists a flat
+
+Priya owns a 2 BHK in Baner and wants to rent it to working bachelors. This is every step she goes through today.
+
+<JourneyRail
+  steps={[
+    { title: "Sign in", text: "Phone OTP", s: "built", href: "#1-sign-in-with-her-phone" },
+    { title: "Profile", text: "Owner, consents", s: "built", href: "#2-complete-her-profile-as-an-owner" },
+    { title: "Fill 5 steps", text: "Draft saved per step", s: "built", href: "#3-start-a-draft-and-fill-the-5-steps" },
+    { title: "Photos", text: "5 to 20, one cover", s: "built", href: "#4-upload-photos" },
+    { title: "Submit", text: "Free listing reserved", s: "built", href: "#5-submit" },
+    { title: "Review", text: "Staff decide", s: "built", href: "#6-staff-review" },
+    { title: "Live 30 days", text: "Not searchable yet", s: "partial", href: "#7-live-for-30-days" },
+    { title: "Enquiries", text: "2 free reveals", s: "none", href: "#8-enquiries" },
+    { title: "Renew", text: "Needs a plan", s: "partial", href: "#9-expiry-and-renewal", paid: true },
+  ]}
+/>
+
+## 1. Sign in with her phone
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> `/signup`
+
+She enters her mobile number, gets a 6-digit code by SMS (valid 5 minutes) and enters it. A new account is created in "profile pending" state. [Sign-in details](../product/accounts/sign-in-and-profile.mdx)
+
+## 2. Complete her profile as an owner
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> part of `/signup`
+
+Name, optional email, **I am an owner**, the 18+ box, terms and privacy. The account type is fixed from now on. If she gave an email, a 24-hour verification link goes out.
+
+## 3. Start a draft and fill the 5 steps
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> `/post-property`
+
+She starts a flat listing and fills **Basic**, **Location**, **Rental**, **Amenities** in any order. Each step saves on its own. Her flat number and exact pin stay private. Writing her phone number in the description is refused. [Field rules](../product/listing/posting-a-flat.mdx)
+
+## 4. Upload photos
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> step 5 of `/post-property`
+
+Each photo goes straight to storage, is resized and watermarked in the background, then attached with a tag. She needs 5 to 20 photos, every one tagged, and one cover. She may add one video. [Photos and video](../product/listing/photos-and-video.mdx)
+
+## 5. Submit
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+The checks run in order: every step valid, no contact details, [quality score](../product/listing/quality-score.mdx) at least 40, not a duplicate property. She has no plan, so her **[Free listing](../product/listing/free-listing.mdx) is reserved** for this flat. The listing goes to **review** (every owner listing does).
+
+If her score is 35, she gets the top 3 tips instead, for example "Add more amenities and furnishing items".
+
+While it's in review she can **withdraw** it to a draft; the Free listing is released.
+
+## 6. Staff review
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" /> (admin API only)
+
+A moderator claims the item, looks at the listing and its flags, and decides. [Staff side](./staff-review-a-listing.mdx)
+
+| Decision | What Priya sees |
+| --- | --- |
+| Approve | In-app: approved. The listing is live. |
+| Request changes | In-app, with the moderator's note. She withdraws to a draft, fixes it, submits again. |
+| Reject | In-app, with the note. Her Free listing is free to use again. |
+
+## 7. Live for 30 days
+
+**Backend** <Status s="partial" /> · **Website** <Status s="screen" /> listing pages show sample data
+
+The listing is `active` for **30 days from approval** and the Free listing is now used. But there's **no search or listing page API yet**, so no tenant can find it.
+
+While live she can **pause** it (the 30 days keep running), **mark it rented**, **archive** it, or **confirm it's still available** (which keeps her quality score up). [Listing lifecycle](../product/listing/listing-lifecycle.mdx)
+
+## 8. Enquiries
+
+**Backend** <Status s="none" /> · **Website** <Status s="none" /> (owner dashboard not built)
+
+When built: tenants who spend a credit appear as locked enquiries; she picks up to **2** to reveal. A plan unlocks all of them. [Contacting a lister](../product/tenants/contacting-a-lister.mdx)
+
+## 9. Expiry and renewal
+
+**Backend** <Status s="partial" /> · **Website** <Status s="screen" /> `/for-owner` plan cards
+
+- **3 days before** the end she gets an in-app reminder.
+- At the end the listing becomes `expired` within a minute.
+- To keep it live she needs an owner plan (Starter Boost ₹1,499 and up). She can [buy one](./buying-a-plan.mdx), but **a bought plan doesn't attach to the listing yet**, so reactivating returns `PLAN_REQUIRED`.
+
+## What blocks this journey today
+
+1. No listing search or detail, so step 7 has no audience.
+2. No enquiries (step 8).
+3. Paid plans don't reach listings (step 9).
+4. The website isn't connected at any step.

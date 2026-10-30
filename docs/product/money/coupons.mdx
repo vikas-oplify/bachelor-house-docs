@@ -1,0 +1,58 @@
+---
+title: Coupons
+sidebar_position: 3
+description: Percent and flat coupons, who can create them, limits, and the 40% cap.
+glance:
+  headline: 40% cap
+  unit: unless finance approves
+  rows:
+    - [Types, Percent or flat]
+    - [Created by, Admin, finance, super admin]
+    - [Limits, Total and per account]
+    - [Reserved, At order, used at payment]
+  backend: built
+  website: none
+---
+
+# Coupons
+
+Staff create coupon codes that discount a plan's base price before GST.
+
+## What a coupon holds
+
+| Field | Rule |
+| --- | --- |
+| Code | 3 to 40 characters: capital letters, digits, `_` and `-` |
+| Discount | A percent, or a flat amount in rupees |
+| Plans | Specific plans, or every plan when left empty |
+| Who | Everyone, or a list of accounts. A "group" audience exists but has no members yet, so it matches nobody. |
+| Window | Valid from and until |
+| Limits | Total uses, and uses per account. Both optional. |
+
+Once created, the **code, discount and audience type can't change**. The window, plans, account list and limits can, and a coupon can be switched off. A total limit can't be lowered below the uses already counted.
+
+:::note[Rule · The 40% cap]
+A discount can be at most **40% of the base price**. Above that, the coupon needs `financeApproved`, which only a **finance** user or **super admin** can set. The database enforces it too. A [setting](../platform/configurable-rules.mdx) for the cap exists, but the code uses a fixed 40% today.
+:::
+
+## How a use is counted
+
+| Moment | Coupon use |
+| --- | --- |
+| Buyer checks the coupon | Nothing is reserved |
+| Order is created | A use is **reserved** |
+| Order is paid and fulfilled | The use is **consumed** |
+| Order fails or expires after 30 minutes | The use is **released** |
+
+If a payment arrives for an order whose coupon reservation was already released, the use is taken back if the limit still has room. If not, the buyer still gets the plan; the limit is never exceeded.
+
+## Why a coupon is refused
+
+The website can show these reasons: `unknown`, `inactive`, `not_started`, `expired`, `plan_not_eligible`, `audience`, `limit_reached`, `account_limit_reached`, and `discount_not_allowed` (the discount would bring the total under ₹1, or a flat coupon is over the 40% cap without approval).
+
+## Edge cases worth testing
+
+- 50% coupon created by an admin: refused. By finance with approval: allowed.
+- Flat ₹2,000 coupon on a ₹3,999 plan without approval: refused at checkout (over 40%).
+- Last use reserved by an open order: a second buyer gets `limit_reached`, until the first order expires.
+- Coupon window ends while an order is open.

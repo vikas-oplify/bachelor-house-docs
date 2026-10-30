@@ -1,0 +1,74 @@
+---
+title: Tenant finds a home
+sidebar_position: 4
+description: A tenant's journey from sign-up to contacting a lister. Most of it isn't built yet.
+---
+
+# Tenant finds a home
+
+Arjun is moving to Pune for a job in Hinjewadi and needs a flat share or PG. This is his journey, and how much of it works today.
+
+<JourneyRail
+  steps={[
+    { title: "Sign in", text: "Phone OTP", s: "built", href: "#1-sign-in-as-a-tenant" },
+    { title: "Pick an area", text: "Autocomplete, my location", s: "built", href: "#2-pick-an-area" },
+    { title: "Search", text: "Listings, filters", s: "none", href: "#3-search" },
+    { title: "Open a listing", text: "Details, photos", s: "none", href: "#4-open-a-listing" },
+    { title: "Contact", text: "1 credit, number shown", s: "none", href: "#5-contact-the-lister", paid: true },
+    { title: "PG full?", text: "Set a room alert", s: "built", href: "#6-a-pg-is-full" },
+    { title: "Buy contacts", text: "15 / 30 / 50", s: "partial", href: "#7-run-out-of-credits", paid: true },
+    { title: "Chat, visit", text: "Inside the enquiry", s: "none", href: "#8-chat-and-visit" },
+  ]}
+/>
+
+## 1. Sign in as a tenant
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> `/signup`
+
+Phone OTP, then the profile as **tenant**. His number gets **5 free contact credits for life**. If he later deletes the account and signs up again, he doesn't get 5 more.
+
+## 2. Pick an area
+
+**Backend** <Status s="built" /> · **Website** <Status s="screen" /> hero search on `/` (pickers do nothing yet)
+
+He types "hinj" and autocomplete suggests Hinjewadi and the IT parks there. Or he taps **Use my location** and gets his nearest locality. [Search and places](../product/tenants/search-and-places.mdx)
+
+## 3. Search
+
+**Backend** <Status s="none" /> · **Website** <Status s="screen" /> `/properties`, `/pg/properties` with sample data
+
+Not built. The listing index, quality score and ranking configuration exist, but there's no search endpoint.
+
+## 4. Open a listing
+
+**Backend** <Status s="none" /> · **Website** <Status s="screen" /> `/properties/[id]`, `/pg/properties/[id]`
+
+Not built. When it is, the page shows the public pin (moved 50 to 300 m) and never the lister's phone number.
+
+## 5. Contact the lister
+
+**Backend** <Status s="none" /> · **Website** <Status s="screen" /> Contact Owner and View Number buttons (do nothing)
+
+Not built. The decided rule: **one credit per listing**, the first time only. Calling, then WhatsApping the same listing costs one credit. The response carries the lister's name, phone and WhatsApp link. [Contacting a lister](../product/tenants/contacting-a-lister.mdx)
+
+## 6. A PG is full
+
+**Backend** <Status s="built" /> · **Website** <Status s="none" />
+
+On a full PG he taps **Notify me**. It costs nothing and lasts 60 days. When the PG lister opens a room, he gets one in-app message. [PG room alerts](../product/tenants/pg-room-alerts.mdx)
+
+## 7. Run out of credits
+
+**Backend** <Status s="partial" /> · **Website** <Status s="none" /> (no tenant plans page)
+
+He can buy **BH Connect** (15 contacts, ₹999), **BH Plus** (30, ₹1,499) or **BH Max** (50, ₹2,199). [Checkout](./buying-a-plan.mdx) works, but there's nothing to spend the contacts on until enquiries exist.
+
+## 8. Chat and visit
+
+**Backend** <Status s="none" /> · **Website** <Status s="none" />
+
+Not built. Chat will live inside the enquiry, with limits of 30 messages per conversation per hour and 200 a day, and an email if a message stays unread for 15 minutes.
+
+## What blocks this journey today
+
+Steps 3, 4, 5 and 8 are the core of the marketplace and none of them exist. This is the biggest gap in the product.

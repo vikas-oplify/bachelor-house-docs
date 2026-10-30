@@ -1,0 +1,253 @@
+.hero {
+  background: linear-gradient(180deg, var(--bh-wash) 0%, var(--ifm-background-color) 100%);
+  padding: 3.5rem 0 2.5rem;
+}
+.heroInner {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+}
+.eyebrow {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--bh-wash-2);
+  color: var(--ifm-color-primary);
+}
+.title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  max-width: 20ch;
+  margin: 0;
+  text-wrap: balance;
+}
+.lead {
+  font-size: 1.1rem;
+  color: var(--bh-ink-2);
+  max-width: 58ch;
+  margin: 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 600px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--bh-line);
+  border-radius: 999px;
+  padding: 0.35rem 0.35rem 0.35rem 1rem;
+  box-shadow: var(--bh-shadow);
+}
+.search:focus-within {
+  border-color: var(--bh-sky-500);
+}
+.searchIcon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  fill: none;
+  stroke: var(--bh-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 0.98rem;
+  color: var(--bh-ink);
+}
+.searchInput::placeholder {
+  color: var(--bh-muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.chip {
+  border: 1px solid var(--bh-sky-200);
+  border-radius: 999px;
+  padding: 0.25rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-primary);
+}
+html[data-theme="dark"] .chip {
+  border-color: var(--bh-line);
+}
+.chip:hover {
+  text-decoration: none;
+  border-color: var(--bh-sky-500);
+}
+
+.section {
+  padding: 2.25rem var(--ifm-spacing-horizontal) 0.5rem;
+}
+.section:last-child {
+  padding-bottom: 4rem;
+}
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem;
+}
+.sub {
+  color: var(--bh-ink-2);
+  max-width: 65ch;
+  margin: 0 0 1.1rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.card {
+  border: 1px solid var(--bh-line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--ifm-background-color);
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+.cardTop {
+  height: 88px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+/* The four gradients of bachelor-house-client globals.css. */
+.gBlue {
+  background: linear-gradient(0deg, #38bdf8 0%, #0369a1 100%);
+}
+.gPurple {
+  background: linear-gradient(0deg, #c084fc 0%, #7e22ce 100%);
+}
+.gGreen {
+  background: linear-gradient(0deg, #34d399 0%, #047857 100%);
+}
+.gGold {
+  background: linear-gradient(0deg, #facc15 0%, #a16207 100%);
+}
+.cardBody {
+  padding: 0.9rem 1rem 1.1rem;
+  display: grid;
+  gap: 0.4rem;
+  align-content: start;
+}
+.cardBody h3 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+.cardBody p {
+  font-size: 0.88rem;
+  color: var(--bh-ink-2);
+  margin: 0;
+}
+.cardBody ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0;
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.journeys {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+.journey {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: start;
+  border: 1px solid var(--bh-line);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  color: var(--bh-ink);
+  background: var(--ifm-background-color);
+}
+.journey:hover {
+  text-decoration: none;
+  color: var(--bh-ink);
+  border-color: var(--bh-sky-500);
+  box-shadow: var(--bh-shadow);
+}
+.journeyTitle {
+  font-weight: 700;
+}
+.journeyText {
+  font-size: 0.86rem;
+  color: var(--bh-ink-2);
+}
+
+.statusBand {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem;
+  background: var(--bh-surface);
+}
+.legend {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.45rem 0.75rem;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--bh-ink-2);
+}
+.legend > span:first-child,
+.legend > span:nth-child(odd) {
+  justify-self: start;
+}
+
+@media (max-width: 996px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .journeys {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .statusBand {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+}
+@media (max-width: 560px) {
+  .hero {
+    padding-top: 2.25rem;
+  }
+  .cards,
+  .journeys {
+    grid-template-columns: 1fr;
+  }
+}

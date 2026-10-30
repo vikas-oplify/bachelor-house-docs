@@ -1,0 +1,79 @@
+---
+title: Privacy and account deletion
+sidebar_position: 3
+description: Data requests under India's DPDP Act, and what happens when a customer deletes their account.
+glance:
+  headline: 30 days
+  unit: to answer or erase
+  rows:
+    - [Request types, 5]
+    - [On delete, Hidden and signed out at once]
+    - [Erased after, 30 days]
+    - [Kept, Invoices, free-allowance hash]
+  backend: built
+  website: none
+  journey: /journeys/leaving-bachelorhouse
+---
+
+# Privacy and account deletion
+
+Customers can ask what BachelorHouse holds about them, correct it, withdraw consent, raise a grievance, or delete their account. Each request has a due date **30 days** after it's raised.
+
+## Data requests
+
+| Type | What the customer asks for |
+| --- | --- |
+| Access | A copy of their data |
+| Correction | Fix something wrong |
+| Erasure | Delete their data |
+| Withdraw consent | Stop a use of their data |
+| Grievance | A complaint |
+
+The customer sees each request's status. Staff work the queue oldest due first, record a response, and close it. **Closing an erasure request is what erases the account.** A second open erasure request returns the first one instead of creating another.
+
+## Deleting the account
+
+Deletion happens in two stages.
+
+### Stage 1: straight away
+
+- The account is closed.
+- Every listing is taken off the site.
+- Every device is signed out.
+- The phone number is freed, so it could sign up again.
+
+### Stage 2: after 30 days
+
+A daily job (or staff closing the request earlier) replaces personal data with blanks or placeholders:
+
+- name, email, billing name, address and GSTIN,
+- uploaded files, including KYC documents,
+- newsletter subscriptions for the account's emails.
+
+### What is kept
+
+| Kept | Why |
+| --- | --- |
+| Orders, payments and issued invoices | Required by law for 8 years |
+| The free-allowance record | Only a hash of the number. Stops a re-signup getting new free credits or a new Free listing. |
+| Audit log | Already masked when written, and append-only |
+
+:::note[Rule · No deletion mid-payment]
+Deletion is refused while an order is being paid or a paid order hasn't been fulfilled yet. The customer can try again once it settles.
+:::
+
+## Retention elsewhere
+
+| Data | Kept for |
+| --- | --- |
+| KYC files | 180 days after the decision |
+| Job applications | 12 months |
+| Unused uploads | 24 hours |
+| Chat messages (when built) | 12 months |
+
+## Edge cases worth testing
+
+- Delete while a Razorpay checkout is open: refused.
+- Delete, then sign up again with the same number: new account, no free credits, no Free listing.
+- Raise erasure twice: one request.
+- Staff close an erasure request on day 5: erased immediately.

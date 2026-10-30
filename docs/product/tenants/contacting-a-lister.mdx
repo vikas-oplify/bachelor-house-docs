@@ -1,0 +1,75 @@
+---
+title: Contacting a lister
+sidebar_position: 1
+description: How a tenant reaches a lister with contact credits. Decided, not built yet.
+glance:
+  headline: 1 credit
+  unit: per listing
+  rows:
+    - [Who, Tenants only]
+    - [Free credits, 5 for life]
+    - [Asking again, Free]
+    - [Packages, 15 / 30 / 50 contacts]
+  backend: none
+  website: screen
+  journey: /journeys/tenant-finds-a-home
+---
+
+# Contacting a lister
+
+A lister's phone number is what tenants pay for. A tenant sees it only after spending **one contact credit** on that listing, and it never appears on a listing or profile page.
+
+:::info[Not built yet]
+The rules below are decided (ADR 0008 in the backend repo) and the credit ledger exists, but there is **no enquiry endpoint yet**. The website's Call, WhatsApp and Contact buttons do nothing. Treat this page as the spec the build will follow.
+:::
+
+## How it will work
+
+1. The tenant taps **Call**, **WhatsApp** or **Chat** on an active listing.
+2. The backend checks the listing is active and hasn't passed its end date.
+3. If the tenant already contacted this listing, nothing is charged: the existing enquiry just records another event.
+4. Otherwise **one credit** is used: a free credit first, then a package credit.
+5. The response carries the lister's name, phone and a WhatsApp link. They're also kept in the tenant's **My contacts**.
+6. The lister is notified.
+
+Chat is part of the enquiry, so the same gate applies to it.
+
+## Credits
+
+| Source | Amount | Notes |
+| --- | --- | --- |
+| Free | **5 for life** | Tied to the phone number, like the [Free listing](../listing/free-listing.mdx). Survives account deletion. |
+| BH Connect | 15 contacts · ₹999 · 45 days | |
+| BH Plus | 30 contacts · ₹1,499 · 60 days | Priority enquiries |
+| BH Max | 50 contacts · ₹2,199 · 90 days | Priority enquiries |
+
+A tenant has **one package at a time**. Buying a new one replaces the current one, whatever its tier, and unused contacts from the old one lapse. Staff can [give credits back](../platform/configurable-rules.mdx#staff-overrides), up to 100 per grant.
+
+## Free listings: the owner chooses
+
+On an owner's Free listing, enquiries start **locked**. The owner picks up to **2** to reveal and sees those tenants' contact details. A paid plan unlocks all enquiries.
+
+## When the lister sees the tenant
+
+The lister's view of a tenant's contact details is worked out fresh on every request, never stored as "unlocked". It needs one of: an active plan on the listing, an agent's city plan, the enquiry's 90-day window, or a Free reveal. The tenant must also have given contact-sharing consent and still be active.
+
+## Limits
+
+| Limit | Default |
+| --- | --- |
+| Enquiries per tenant per hour | 10 |
+| Enquiries per tenant per day | 30 |
+| Chat messages per conversation per hour | 30 |
+| Chat messages per day | 200 |
+| Email about an unread chat message | After 15 minutes |
+| Chat kept for | 12 months |
+
+All are [settings](../platform/configurable-rules.mdx).
+
+## Edge cases to test once built
+
+- Contact the same listing by call, then WhatsApp: one credit.
+- Contact with 0 credits left: `QUOTA_EXHAUSTED`.
+- Two taps at once on a new listing: one credit.
+- Contact a listing one second after its end.
+- Listing, profile and search responses never contain a phone field.

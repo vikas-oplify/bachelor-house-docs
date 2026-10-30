@@ -1,0 +1,59 @@
+---
+title: Quality score
+sidebar_position: 5
+description: The 0–100 score every listing gets, what earns points, and what it unlocks.
+glance:
+  headline: 40 / 100
+  unit: to submit
+  rows:
+    - [Paid benefits, From 60]
+    - [Full benefits, From 80]
+    - [Recomputed, On every change + nightly]
+    - [Tips shown, Top 3]
+  backend: built
+  website: none
+---
+
+# Quality score
+
+Every listing has a **quality score from 0 to 100**. It decides whether the listing can be submitted at all, and whether paid placement applies. The lister sees the score with up to three tips on how to raise it.
+
+## What earns points
+
+| Component | Max points | Full points when |
+| --- | --- | --- |
+| Completeness | 25 | Every optional field is filled and the description is 150+ characters |
+| Photos | 25 | Many sharp photos (long edge 1,200 px+) covering the key rooms. Duplicates count once. 3 photos earn 6 of the count points, 5 earn 10, 8+ earn 15. |
+| Pricing | 20 | Rent, deposit and maintenance are filled, and the rent sits inside the usual range for similar listings |
+| Amenities | 15 | 8 or more amenities and furnishing items |
+| Location | 10 | The map pin is inside the chosen locality, with a society or landmark |
+| Availability | 5 | Confirmed available in the last 15 days (60% of the points up to 30 days, none after) |
+
+The maxima are part of a versioned ranking configuration that a super admin can change. They always add up to 100.
+
+## What the score unlocks
+
+| Score | Band | Effect |
+| --- | --- | --- |
+| Below 40 | | Can't be submitted (`QUALITY_TOO_LOW`) |
+| 40 to 59 | Organic | Visible, but paid placement is switched off |
+| 60 to 79 | Paid | Paid benefits (featured badge, promotion) apply |
+| 80 and up | Full | Full benefits apply |
+
+If a live listing with a paid plan drops below 60, its featured or premium tier is cleared. The plan keeps running and the tier can come back once the score is 60 again.
+
+## Tips
+
+The lister sees the three components with the most points still available, biggest first. For example: "Add more amenities and furnishing items (8 or more earns the full points)".
+
+## When it's recomputed
+
+- When the listing changes, and as part of submit, so the dashboard and the submit error always agree.
+- Every night at 03:00 IST for every live listing, because comparable rents and availability age.
+
+## Edge cases worth testing
+
+- A listing at exactly 40: can be submitted.
+- Two identical photos counted as one: score lower than with two different photos.
+- A pin dropped outside the locality: location points drop.
+- A live listing not confirmed for 31 days: availability points go to 0 overnight.
