@@ -1,0 +1,45 @@
+---
+title: Engineering
+slug: /engineering
+sidebar_position: 0
+description: How the BachelorHouse backend and website are built, run and tested.
+---
+
+import sync from "@site/src/data/sync.json";
+
+# Engineering
+
+How BachelorHouse is built. The **backend** (`bachelor-house-backend`, branch `chore/scaffold-from-reference`) is a TypeScript modular monolith on Express 5, PostgreSQL and Redis. The **website** (`bachelor-house-client`, `main`) is a Next.js 16 app. For what the product does and how much of it is built, see the [Product guide](/product).
+
+<div className="sync-strip">
+  <div><strong>{sync.api.operations}</strong> API endpoints</div>
+  <div><strong>{sync.data.tables}</strong> tables</div>
+  <div><strong>{sync.jobs.handled}/{sync.jobs.total}</strong> jobs with a handler</div>
+  <div><strong>{sync.website.pages}</strong> website pages</div>
+</div>
+
+<div className="sync-meta">Reference synced from backend <code>{sync.backend.sha}</code> ({sync.backend.date.slice(0, 10)}) and client <code>{sync.client.sha}</code> ({sync.client.date.slice(0, 10)}).</div>
+
+## Where to start
+
+| If you want to… | Read |
+| --- | --- |
+| See how the pieces fit | [Architecture](./getting-started/architecture.md) |
+| Run it on your machine | [Local setup](./getting-started/local-setup.md) |
+| Add an endpoint or a table | [Codebase conventions](./getting-started/codebase-conventions.md), then [Request pipeline](./backend/request-pipeline.md) |
+| Understand a design choice | [Design decisions](./decisions.md) |
+| Look up an endpoint, table or error | [Reference](/engineering/reference/api) |
+| Wire the website to the API | [The website](./website/client.md) |
+
+## Guides
+
+- **Backend:** [request pipeline](./backend/request-pipeline.md), [auth and sessions](./backend/auth-and-sessions.md), [listings](./backend/listings.md), [money and billing](./backend/money-and-billing.md), [background jobs](./backend/background-jobs.md), [media and KYC](./backend/media-and-kyc.md), [notifications](./backend/notifications.md), [concurrency and time](./backend/concurrency-and-time.md).
+- **Operations:** [testing](./operations/testing.md), [CI/CD](./operations/ci-cd.md), [environments and config](./operations/environments.md), [maintaining these docs](./operations/maintaining-docs.md).
+
+## Reference (generated)
+
+The reference is rebuilt from the repos by `npm run sync`, so it matches the code at the commits above.
+
+- [API](/engineering/reference/api): every endpoint, its access level, request and response fields, and error codes.
+- [Data model](/engineering/reference/data-model): every table, column, constraint, index and enum.
+- [Error codes](./reference/error-codes.md), [settings](./reference/settings.md), [background jobs](./reference/jobs.md), [website routes](./reference/client-routes.md).

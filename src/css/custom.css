@@ -36,6 +36,8 @@
   --bh-ui-ink: #7e22ce;
   --bh-none-bg: #f1f3f3;
   --bh-none-ink: #4c5457;
+  --bh-del-bg: #fef2f2;
+  --bh-del-ink: #b91c1c;
 
   --ifm-color-primary: #0369a1;
   --ifm-color-primary-dark: #035f91;
@@ -90,6 +92,8 @@ html[data-theme="dark"] {
   --bh-ui-ink: #d8b4fe;
   --bh-none-bg: #1f2a2d;
   --bh-none-ink: #c0c6c8;
+  --bh-del-bg: #3a1414;
+  --bh-del-ink: #fca5a5;
 
   --ifm-color-primary: #38bdf8;
   --ifm-color-primary-dark: #1bb3f7;
@@ -317,4 +321,65 @@ html[data-theme="dark"] .navbar__title {
 .docusaurus-mermaid-container .note {
   fill: var(--bh-rule-bg) !important;
   stroke: var(--bh-rule-line) !important;
+}
+
+/* ─── Engineering reference ──────────────────────────────────────────────── */
+
+.method,
+.access {
+  display: inline-block;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.method {
+  font-family: var(--ifm-font-family-monospace);
+}
+.method--get { color: var(--bh-ok-ink); background: var(--bh-ok-bg); }
+.method--post { color: var(--bh-sky-700); background: var(--bh-sky-100); }
+.method--put,
+.method--patch { color: var(--bh-part-ink); background: var(--bh-part-bg); }
+.method--delete { color: var(--bh-del-ink); background: var(--bh-del-bg); }
+.access--public { color: var(--bh-none-ink); background: var(--bh-none-bg); }
+.access--user { color: var(--bh-sky-700); background: var(--bh-sky-100); }
+.access--staff { color: var(--bh-ui-ink); background: var(--bh-ui-bg); }
+html[data-theme="dark"] .method--post,
+html[data-theme="dark"] .access--user { color: var(--bh-sky-200); background: var(--bh-wash-2); }
+
+.markdown details {
+  border-color: var(--bh-line);
+  background: var(--bh-surface);
+  --ifm-alert-background-color: var(--bh-surface);
+  --ifm-alert-border-color: var(--bh-line);
+  --ifm-alert-foreground-color: var(--bh-ink);
+}
+
+.sync-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0 0.5rem;
+}
+.sync-strip > div {
+  border: 1px solid var(--bh-line);
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+  background: var(--bh-wash);
+  color: var(--bh-ink-2);
+  font-size: 0.85rem;
+}
+.sync-strip strong {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--bh-ink);
+  line-height: 1.2;
+}
+.sync-meta {
+  font-size: 0.8rem;
+  color: var(--bh-muted);
 }

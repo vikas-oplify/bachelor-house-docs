@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-10-30T17:53:05.019Z",
+  "backend": {
+    "sha": "c4bcee6",
+    "date": "2026-10-30T16:29:33+05:30",
+    "subject": "feat(disputes): ownership disputes S11/L21/AD65 with proof timeout (T-247) (#99)",
+    "ref": "chore/scaffold-from-reference"
+  },
+  "client": {
+    "sha": "f86531b",
+    "date": "2026-10-15T01:40:51+05:30",
+    "subject": "Merge pull request #32 from oplifyterminal/development",
+    "ref": "main"
+  },
+  "api": {
+    "operations": 178,
+    "public": 37,
+    "user": 50,
+    "staff": 91,
+    "pages": 21
+  },
+  "data": {
+    "tables": 65,
+    "enums": 58,
+    "migrations": 42,
+    "modules": 21
+  },
+  "errors": 71,
+  "settings": {
+    "total": 38,
+    "unread": [
+      "owner.free_reveals_per_listing",
+      "enquiry.post_expiry_access_days",
+      "listing.sensitive_price_change_pct",
+      "listing.expiry_reminder_days",
+      "listing.unit_anchor_lookback_days",
+      "moderation.pg_trusted_after_days",
+      "moderation.review_target_hours",
+      "coupon.max_discount_bp",
+      "services.shoot_validity_after_plan_days",
+      "services.remedy_working_days",
+      "analytics.benchmark_min_listings",
+      "reports.autopause_threshold",
+      "features.matching_enabled",
+      "features.reviews_enabled",
+      "features.chat_enabled",
+      "chat.email_after_minutes",
+      "chat.retention_months",
+      "pg.availability_confirm_days",
+      "pg.availability_alert_days",
+      "search.allocation.apply_on_explicit_sort"
+    ]
+  },
+  "jobs": {
+    "total": 38,
+    "handled": 20,
+    "unhandled": [
+      "subscriptions.lifecycle",
+      "subscriptions.reminders",
+      "subscriptions.slot-recount",
+      "boosts.complete",
+      "billing.reconcile",
+      "billing.process-webhook",
+      "billing.zoho-sync",
+      "billing.auto-refunds",
+      "analytics.rollup",
+      "analytics.benchmarks",
+      "ranking.homepage-rotate",
+      "ranking.fairness-monitor",
+      "matching.build-demand",
+      "matching.release-reservations",
+      "reports.autopause",
+      "shoots.lifecycle",
+      "alerts.enquiry-harvest",
+      "chat.email-unread"
+    ]
+  },
+  "website": {
+    "pages": 29,
+    "apiCalls": 0
+  }
+}

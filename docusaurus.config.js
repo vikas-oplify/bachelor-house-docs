@@ -93,6 +93,7 @@ const config = {
             position: "left",
             activeBaseRegex: "/product/build-status$",
           },
+          { type: "docSidebar", sidebarId: "engineering", position: "left", label: "Engineering" },
           { type: "search", position: "right" },
           {
             type: "dropdown",
@@ -130,6 +131,15 @@ const config = {
               { label: "Owner lists a flat", to: "/journeys/owner-lists-a-flat" },
               { label: "PG operator lists a PG", to: "/journeys/pg-lists-a-pg" },
               { label: "Tenant finds a home", to: "/journeys/tenant-finds-a-home" },
+            ],
+          },
+          {
+            title: "Engineering",
+            items: [
+              { label: "Architecture", to: "/engineering/getting-started/architecture" },
+              { label: "Local setup", to: "/engineering/getting-started/local-setup" },
+              { label: "API reference", to: "/engineering/reference/api" },
+              { label: "Design decisions", to: "/engineering/decisions" },
             ],
           },
           {

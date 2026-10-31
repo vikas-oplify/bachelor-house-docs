@@ -1,0 +1,10 @@
+{
+  "label": "Reference",
+  "position": 6,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "/engineering/reference",
+    "description": "Generated from the backend and client repos by `npm run sync`."
+  }
+}

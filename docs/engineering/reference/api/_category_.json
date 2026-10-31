@@ -1,0 +1,10 @@
+{
+  "label": "API",
+  "position": 1,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "/engineering/reference/api",
+    "description": "Every endpoint of the backend, generated from its OpenAPI contract."
+  }
+}
